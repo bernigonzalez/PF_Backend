@@ -1,0 +1,101 @@
+@baseUrl = http://localhost:5000
+@baseUrlApi = https://ecommerce-pg-henry.herokuapp.com
+
+### Tiene que estar logueado para poder hacer peticiones en las rutas pedidos por ello tambien usamos la ruta user/register
+
+### REGISTRO UN USUARIO PARA TENER UN TOKEN DE AUTENTICACIÓN
+# @name usuarioUno
+
+POST {{baseUrl}}/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "email": "luis@gmail.com",
+   "contrasena": "contraseña1"
+}
+
+### guardo el token
+@tokenUno = {{usuarioUno.response.body.token}}
+
+### ya puedo postear un pedido
+POST {{baseUrl}}/pedidos HTTP/1.1
+x-auth-token: {{tokenUno}}
+Content-Type: application/json
+
+{
+   "pedidos": [
+      {"productoId": 1, "cantidad": 4}, 
+      {"productoId": 2, "cantidad": 6}, 
+      {"productoId": 3, "cantidad": 10}, 
+      {"productoId": 8, "cantidad": 3}
+   ]
+}
+
+### Solo el admin tiene acceso a algunas rutas de pedidos
+# @name usuarioAdmin
+POST {{baseUrl}}/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "contrasena": "admin123",
+   "email": "admin@gmail.com"
+}
+
+### guardo el token
+@tokenAdmin = {{usuarioAdmin.response.body.token}}
+
+### obtener todos los pedidos
+GET {{baseUrl}}/pedidos HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+### obtener todos los pedidos filtrando por fecha YY-MM-DD
+GET {{baseUrl}}/pedidos?desde=2022-02-08&hasta=2022-02-09 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+###
+GET {{baseUrl}}/pedidos?desde=2021-02-08&hasta=2022-02-09 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+###
+GET {{baseUrl}}/pedidos?desde=2023-02-08&hasta=2022-02-09 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+### Actualizamos un pedido a completado
+PUT {{baseUrl}}/pedidos/1 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "status": "COMPLETADO"
+}
+
+### ruta pedidos/user/:userId
+### Solo el usuario propietario puede acceder a sus propios pedidos y el admin a todos
+# Usuario 1 es admin, ya que se inicializa con el servidor
+GET {{baseUrl}}/pedidos/user/2 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+### El admin puede ver los pedidos de sus clientes
+GET {{baseUrl}}/pedidos/user/10 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+### Cuando pide su propia informacion se la entrega
+GET {{baseUrl}}/pedidos/user/6 HTTP/1.1
+x-auth-token: {{tokenUno}}
+
+
+### Cuando pide información de otro usuario le envía un error (403)
+GET {{baseUrl}}/pedidos/user/1 HTTP/1.1
+x-auth-token: {{tokenUno}}
+
+### Obtener info de un pedido por id del pedido falta control ya que cualquier usuario registrado puede acceder
+GET {{baseUrl}}/pedidos/3 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+### Voy a eliminar el pedido 1
+DELETE {{baseUrl}}/pedidos/1 HTTP/1.1
+x-auth-token: {{tokenUno}}
+
+### Voy a eliminar el pedido 2 pero con el token del admin (debería permitirmelo)
+DELETE {{baseUrl}}/pedidos/2 HTTP/1.1
+x-auth-token: {{tokenAdmin}}

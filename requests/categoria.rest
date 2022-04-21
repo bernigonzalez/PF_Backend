@@ -1,0 +1,116 @@
+@baseUrl = http://localhost:5000
+### Public /categories
+GET {{baseUrl}}/categories HTTP/1.1
+
+### Por query nombre
+GET {{baseUrl}}/categories?nombre=mou HTTP/1.1
+
+### 
+GET {{baseUrl}}/categories?nombre=aceite HTTP/1.1
+
+
+### Solo el admin tiene acceso a las acciones: Update, Delete, Create
+# @name usuarioAdmin
+POST {{baseUrl}}/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "contrasena": "admin123",
+   "email": "admin@gmail.com"
+}
+
+### guardo el token
+@tokenAdmin = {{usuarioAdmin.response.body.token}}
+
+### obtener todos los pedidos
+POST {{baseUrl}}/categories  HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "nombre": "Nueva"
+}
+
+###
+POST {{baseUrl}}/categories  HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "nombre": "Mouses"
+}
+
+###
+POST {{baseUrl}}/categories  HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "nombre": "Auriculares"
+}
+
+###
+PUT {{baseUrl}}/categories/update  HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "id": 1,
+   "nombre": "Edit1"
+}
+
+###
+DELETE {{baseUrl}}/categories/delete  HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "id": 1
+}
+
+### Compruebo que no le deje realizar las acciones CUD a un usuario normal
+# @name usuarioNormal
+POST {{baseUrl}}/user/register HTTP/1.1 
+Content-Type: application/json
+
+{
+   "nombre": "Juanito",
+   "usuario": "Juan001", 
+   "contrasena": "password123",
+   "email": "juanito.perez@gmail.com", 
+   "pais": "Ecuador", 
+   "provincia": "Quito", 
+   "direccion": "Av. Amazonica y Jose Montalvo", 
+   "telefono": "0921712878"
+}
+
+### guardo el token
+@tokenNormal = {{usuarioNormal.response.body.token}}
+
+### Crear
+POST {{baseUrl}}/categories  HTTP/1.1
+x-auth-token: {{tokenNormal}}
+Content-Type: application/json
+
+{
+   "nombre": "Auriculares"
+}
+
+### Actualizar
+PUT {{baseUrl}}/categories/update  HTTP/1.1
+x-auth-token: {{tokenNormal}}
+Content-Type: application/json
+
+{
+   "id": 1,
+   "nombre": "Edit1"
+}
+
+### Eliminar
+DELETE {{baseUrl}}/categories/delete  HTTP/1.1
+x-auth-token: {{tokenNormal}}
+Content-Type: application/json
+
+{
+   "id": 1
+}

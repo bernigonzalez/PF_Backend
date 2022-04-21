@@ -1,0 +1,177 @@
+@baseUrl = http://localhost:5000
+### Public /offers
+GET {{baseUrl}}/offers HTTP/1.1
+
+### Public /offers/:id
+GET {{baseUrl}}/offers/1 HTTP/1.1
+
+### Solo el admin tiene acceso a las acciones: Update, Delete, Create oferta
+# @name usuarioAdmin
+POST {{baseUrl}}/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "contrasena": "admin123",
+   "email": "admin@gmail.com"
+}
+
+### guardo el token
+@tokenAdmin = {{usuarioAdmin.response.body.token}}
+
+### Creo una oferta
+POST {{baseUrl}}/offers  HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "titulo": "Oferta por el día del programador", 
+   "descripcion": "Las primeras 12 compras de un Mouse nisik tienen el 5% de descuento",
+   "porcentajeDescuento": 5, 
+   "productos": [{"id": 1, "cantidad":5 }, {"id": 2, "cantidad":7 }] 
+}
+
+### Creo otra oferta con una cantidad que no hay
+POST {{baseUrl}}/offers  HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "titulo": "Oferta por el día del padre", 
+   "descripcion": "Obten el 3% de descuento en tus productos favoritos",
+   "porcentajeDescuento": 3, 
+   "productos": [{"id": 4, "cantidad":8 }, {"id": 6, "cantidad":30 }] 
+}
+
+
+### Creo otra oferta con un producto que no hay
+POST {{baseUrl}}/offers  HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "titulo": "Oferta", 
+   "descripcion": "Obten el 3% de descuento en tus productos favoritos",
+   "porcentajeDescuento": 3, 
+   "productos": [
+      {"id": 7, "cantidad":8 }, 
+      {"id": 34, "cantidad":30 }, 
+      {"id": 100, "cantidad":30} 
+   ]
+}
+
+###
+PUT {{baseUrl}}/offers/1 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "titulo": "Edit", 
+   "descripcion": "Edit debe ser una descripcion de al menos 10 caracteres",
+   "porcentajeDescuento": 5, 
+   "estado": "INACTIVA",
+   "productos": [
+      {"id": 34, "cantidad":7 }
+   ]
+}
+
+###
+PUT {{baseUrl}}/offers/2 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "titulo": "Edit", 
+   "descripcion": "Edit descripcion larga",
+   "estado": "ACTIVA",
+   "porcentajeDescuento": 5
+}
+
+###
+PUT {{baseUrl}}/offers/200 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "titulo": "aksjkajsk", 
+   "descripcion": "Edit",
+   "porcentajeDescuento": 5
+}
+
+###
+PUT {{baseUrl}}/offers/add/1 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "producto": {
+      "id": 1,
+      "cantidad": 4
+   }
+}
+
+### peticion erronea debería responder con 400
+PUT {{baseUrl}}/offers/add/1 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "producto": {
+      "id": 7,
+      "cantidad": 4
+   }
+}
+
+### Quitar un producto de una oferta
+PUT {{baseUrl}}/offers/remove/7 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "productoId": 1
+}
+
+### peticion erronea debería responder con 400
+PUT {{baseUrl}}/offers/add/1 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "producto": {
+      "id": 45,
+      "cantidad": 4
+   }
+}
+
+
+### peticion erronea debería responder con 404
+PUT {{baseUrl}}/offers/add/100 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "producto": {
+      "id": 5,
+      "cantidad": 4
+   }
+}
+
+###
+PUT {{baseUrl}}/offers/remove/100 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "producto": {
+      "id": 5,
+      "cantidad": 4
+   }
+}
+
+###
+PUT {{baseUrl}}/offers/remove/1 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "productoId": 23
+}

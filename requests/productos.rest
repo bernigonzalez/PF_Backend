@@ -1,0 +1,85 @@
+@baseUrl = http://localhost:5000/products
+@base = http://localhost:5000
+
+### Obteniendo todos los productos
+GET {{baseUrl}} HTTP/1.1
+
+### Obteniendo un producto por id
+GET {{baseUrl}}/5 HTTP/1.1
+
+###
+GET {{baseUrl}}/1 HTTP/1.1
+
+### Obteniedo productos de una categoría específica
+GET {{baseUrl}}/category/5 HTTP/1.1
+
+###
+GET {{baseUrl}}/category/7 HTTP/1.1
+###
+GET {{baseUrl}}/1 HTTP/1.1
+
+### Posteando un nuevo producto
+### Private Admin products/
+# @name usuarioAdmin
+POST {{base}}/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "contrasena": "admin123",
+   "email": "admin@gmail.com"
+}
+
+### guardo el token
+@tokenAdmin = {{usuarioAdmin.response.body.token}}
+### CREO -> un nuevo producto
+POST {{baseUrl}} HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "title": "Nuevo Producto",
+   "price": 12.5,
+   "description": "Soy un nuevo producto",
+   "category": 3,
+   "image": "fake.png",
+   "cantidad": 20
+}
+
+### 
+PUT {{baseUrl}}/21 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "title": "Edit",
+   "price": 12.5,
+   "description": "Edit debo de ser una descripción más larga",
+   "category": 4,
+   "image": "edit.png",
+   "cantidad": 10
+}
+
+###
+PUT {{baseUrl}}/rate HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "id":1,
+   "rate": 5
+}
+
+###
+PUT {{baseUrl}}/rate HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json
+
+{
+   "id":21,
+   "rate": 3.8
+}
+
+### 
+DELETE {{baseUrl}}/21 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+Content-Type: application/json

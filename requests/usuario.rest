@@ -1,0 +1,127 @@
+###
+@baseUrl = http://localhost:5000/user
+# @name usuarioUno
+### REGISTRO DE USUARIOS  POST user/register
+POST {{baseUrl}}/register HTTP/1.1 
+Content-Type: application/json
+
+{
+   "nombre": "Viviana",
+   "usuario": "Codaya007", 
+   "contrasena": "mysecretpassword",
+   "email": "vivicalva@gmail.com", 
+   "pais": "Ecuador", 
+   "provincia": "Loja", 
+   "direccion": "Av. Amazonica y Felipe Muñoz", 
+   "telefono": "0921827178"
+}
+
+###
+@tokenUno = {{usuarioUno.response.body.token}}
+
+### ACTUALIZAR USUARIO PUT /updateUser
+PUT {{baseUrl}}/update HTTP/1.1 
+x-auth-token: {{tokenUno}}
+Content-Type: application/json
+
+{  "id": 6, 
+   "nombre": "Vivi",
+   "usuario": "Codaya007", 
+   "contrasena": "mysecretpassword",
+   "email": "vivicalva@gmail.com", 
+   "pais": "Argentina", 
+   "provincia": "Loja", 
+   "direccion": "Av. Amazonica y Felipe Muñoz", 
+   "telefono": "0921827178"
+}
+
+###
+# @name usuarioDos
+POST {{baseUrl}}/register HTTP/1.1 
+Content-Type: application/json
+
+{
+   "nombre": "Juanito",
+   "usuario": "Juan001", 
+   "contrasena": "password123",
+   "email": "juanito.perez@gmail.com", 
+   "pais": "Ecuador", 
+   "provincia": "Quito", 
+   "direccion": "Av. Amazonica y Jose Montalvo", 
+   "telefono": "0921712878"
+}
+
+### LOGIN DE USUARIOS POST user/login
+# @name usuarioUno
+POST {{baseUrl}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "contrasena": "mysecretpassword",
+   "email": "vivicalva@gmail.com"
+}
+
+###
+@tokenUno = {{usuarioUno.response.body.token}}
+
+###
+# @name usuarioDos
+POST {{baseUrl}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "contrasena": "password123",
+   "email": "juanito.perez@gmail.com"
+}
+
+###
+@tokenDos = {{usuarioDos.response.body.token}}
+
+### OBTENER INFORMACIÓN DE USUARIOS GET user/
+# Para poder obtener la información de un usuario, debe estar este usuario ya logeado, así que vamos a usar las varibles que contienen los tokens de los usuarios logueados: tokenUno, tokenDos
+
+###
+GET {{baseUrl}} HTTP/1.1
+x-auth-token: {{tokenUno}}
+
+###
+GET {{baseUrl}} HTTP/1.1
+x-auth-token: {{tokenDos}}
+
+### NUEVAS RUTAS
+# @name usuarioAdmin
+POST {{baseUrl}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "contrasena": "admin123",
+   "email": "admin@gmail.com"
+}
+
+### guardo el token
+@tokenAdmin = {{usuarioAdmin.response.body.token}}
+###
+GET {{baseUrl}}/all HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+### Usuario de prueba para bloqueo y desbloqueo de cuenta
+# @name usuarioX
+
+POST {{baseUrl}}/login HTTP/1.1 
+Content-Type: application/json
+
+{
+   "email": "fede@gmail.com",
+   "contrasena": "contraseña5"
+}
+
+### guardo el token
+@tokenX = {{usuarioX.response.body.token}}
+
+### Bloquear un usuario para que no pueda iniciar sesión más
+PUT {{baseUrl}}/block/5 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
+
+### DESBloquear un usuario
+PUT {{baseUrl}}/unlock/5 HTTP/1.1
+x-auth-token: {{tokenAdmin}}
