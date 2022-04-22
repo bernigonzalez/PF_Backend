@@ -1,0 +1,28 @@
+    const bodyPago = {
+    payer_email: process.env.PAYER_EMAIL,
+    items: [
+      {
+        title: "Tienda de Muebles",
+        description: "Tienda de muebles",
+        picture_url: "https://png.pngtree.com/png-clipart/20190520/original/pngtree-girl-taking-a-taxi-out-taxitrunktravel-png-image_4032278.jpg",
+        category_id: "category123",
+        quantity: 1,
+        unit_price: 100
+      }
+    ],
+    back_urls: {
+      failure: "/failure",
+      pending: "/pending",
+      success: "http://localhost:3000/home"
+    },
+    payment_methods: {
+        excluded_payment_types: [
+            {
+                id: "ticket"
+            }
+        ],
+          installments: 12
+      }
+  }
+
+  module.exports = bodyPago

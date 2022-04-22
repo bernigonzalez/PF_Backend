@@ -12,6 +12,9 @@ const offersRouter = require("./oferta.routes");
 const comentariosRouter = require("./comentario.routes");
 const forgotPasswordRouter = require("./forgotPassword.routes");
 const resetPasswordRouter = require("./resetPassword.routes");
+const pagoRouter = require("./mercadoPago.routes")
+const wapRouter = require("./whatsapp.routes")
+
 
 const router = Router();
 
@@ -27,5 +30,7 @@ router.use("/pagos", pagosRouter);
 router.use("/comments", comentariosRouter);
 router.use("/password", forgotPasswordRouter);
 router.use("/resetPassword", resetPasswordRouter);
+router.use("/pago", pagoRouter)
+router.use("/whatsapp", wapRouter)
 
 module.exports = router;
