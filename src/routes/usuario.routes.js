@@ -174,7 +174,7 @@ userRouter.post("/login", [
 // @route GET api/user
 // @desc Información del usuario
 // @access Private
-userRouter.get("/", async (req, res, next) => {
+userRouter.get("/", authentication, async (req, res, next) => {
   try {
     let user = await Usuario.findByPk(req.usuario.id);
 
