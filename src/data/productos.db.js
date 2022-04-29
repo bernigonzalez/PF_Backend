@@ -500,4 +500,70 @@ module.exports = [
    "cantidad": 30,
 },
 
+{
+   "id": 46,
+   "title": "E27 Silicone Light",
+   "price": 135,
+   "description": "Hay algo romántico y contemporáneo en la simplicidad de la bombilla desnuda, cree el diseñador Mattias Ståhlbom, socio del internacionalmente aclamado estudio de arquitectura y diseño TAF, que celebra la esencia de la lámpara -el casquillo- en un modelo que denomina E27 para la casa danesa Muuto. No podemos estar más de acuerdo. Hemos instalado tres en nuestra cocina, dos grises y una de color amarillo, con gran efecto.",
+   "images": ["https://cdn.shopify.com/s/files/1/0012/2005/1002/products/2_a674dc1e-3f7a-4d00-82dc-fa2be2c3eb66_640x@2x.progressive.jpg?v=1569470959", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/3_bec9e99d-19d8-46d5-874c-30c248f1213d_640x@2x.progressive.jpg?v=1569470959", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/4_9f3867c6-4a05-4478-9943-82866af7fa4e_640x@2x.progressive.jpg?v=1569470959", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/8_e133de93-6750-4c14-950d-93b438c1fc3b_640x@2x.progressive.jpg?v=1569470960", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/11_42a2f0d8-7d9b-4f0c-a708-3f4c5dfd4adf_640x@2x.progressive.jpg?v=1569470960", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/9_59aea218-848f-46f2-b5e0-9967e3304f58_640x@2x.progressive.jpg?v=1569470960"],
+   "category": "Iluminacion",
+   "size": "11.6 h x 12.8 dia (29.5x32.5cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 47,
+   "title": "Unfold Pendant Light",
+   "price": 335,
+   "description": "El marco rígido del arquetípico colgante industrial se reimagina en suave silicona. Es un giro moderno de un clásico realizado por los suecos de Form Us With Love para el grupo de diseño danés Muuto, y en una selección de colores que casi pide que se presente más de una lámpara en el mismo espacio. El nuevo material también permite que la lámpara se pliegue fácilmente, lo que la convierte en un elemento esencial para nuestro estilo de vida contemporáneo y cambiante.",
+   "images": ["https://cdn.shopify.com/s/files/1/0012/2005/1002/products/2_dbc6aa41-2265-4aa7-903c-455509d13c14_1_640x@2x.progressive.jpg?v=1625639783", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/3_f778a5ac-9aa8-40aa-9c66-a0c6d2c0e11d_640x@2x.progressive.jpg?v=1625639785", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/5_7e017571-02fa-4e09-8b1f-3daf5115a632_640x@2x.progressive.jpg?v=1625639787", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/6_c46ad5f0-a656-4233-9467-7075da182eba_640x@2x.progressive.jpg?v=1625639786", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/7_6e423aab-99e8-492b-a661-f2de8681db5b_640x@2x.progressive.jpg?v=1625639783", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/8_d21c1a1e-a44d-4c20-abd1-90aab5a5b665_640x@2x.progressive.jpg?v=1625639783"],
+   "category": "Iluminacion",
+   "size": "11.6 h x 12.8 dia (29.5x32.5cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 48,
+   "title": "Bicocca Table Lamp",
+   "price": 252,
+   "description": "La colorida lámpara del diseñador Christophe Mathieu para Marset se adapta a cualquier entorno en el que se necesite una luz cercana y personal para la lectura u otras actividades cercanas. A través de sus 3 accesorios imantados, Bicoca puede adherirse a una superficie metálica o a la pared, fijarse a un sillón, un sofá o un cabecero, o asentarse en una superficie de comedor, incluso sobre un mantel. La duración de la batería recargable oscila entre 5 horas de potencia máxima y 20 horas de potencia trimestral de la fuente de luz LED regulable (tras sólo 10 horas de carga).",
+   "images": ["https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Wine_08691f2d-8e95-4ab8-8191-b36cc1fc6042_640x@2x.progressive.jpg?v=1628138120", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Blue_a141e9d6-1d8f-408d-8614-676039a36a3b_640x@2x.progressive.jpg?v=1628138120", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Anthracite_bd83d0e6-faa5-4522-89f8-1b7833d5856f_640x@2x.progressive.jpg?v=1628138119", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/19_4775dede-747e-46d5-86e9-7f4f746ae5ca_640x@2x.progressive.jpg?v=1569490059", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Yellow_7cded92e-0998-4f11-ba6b-17ea35dc936e_80x@2x.progressive.jpg?v=1650871908", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Pink_c290f053-93d1-4396-804f-7bd6e23e7e59_640x@2x.progressive.jpg?v=1650871908"],
+   "category": "Iluminacion",
+   "size": "8.9 h x 5.5 dia (22.5x14cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 49,
+   "title": "Outdooroven",
+   "price": 1095,
+   "description": "El nombre de Outdooroven apenas comienza a describir la cocina multifuncional para patio o jardín del diseñador de productos holandés Vanhoffontwerpen. Este aparato de leña combina parrilla, horno de pizza, placa de cocción y chimenea de calentamiento, todo en uno. Fabricada en acero corten naturalmente resistente a la intemperie, está pensada para permanecer a la intemperie durante todo el año, ya que el revestimiento de óxido la protege de una mayor corrosión. Listo para usar de inmediato y con piedra para pizza y parrilla de alambre incluidas",
+   "images": ["https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree_Outdooroven_Studio_3_1_640x@2x.progressive.jpg?v=1632390175", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree-Outdooroven-3_640x@2x.progressive.jpg?v=1647670620", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree_Outdooroven_Studio_2_eb55200a-c06f-41c5-8d19-4941039ef4dd_640x@2x.progressive.jpg?v=1647670620", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree-outdoorovendoor_640x@2x.progressive.jpg?v=1647670620", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/04_2beacc5b-a33c-49d2-bc70-e1ea16616222_640x@2x.progressive.jpg?v=1647670620", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/03_11beb230-cb37-438c-a7aa-3ab03534b8b8_640x@2x.progressive.jpg?v=1647670620"],
+   "category": "Exterior",
+   "size": "35.5 h x 16.9 w x 13 d (90x43x33cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 50,
+   "title": "Beach Rocker",
+   "price": 329,
+   "description": "El diseñador holandés Erik Stehmann ha pensado en algo mejor y ha ideado la mecedora Beach, que mejora la comodidad de los clásicos asientos de playa y piscina con una estructura de madera de haya maciza y barnizada procedente de los bosques holandeses. La tela del asiento de algodón está disponible en una selección de alegres rayas que hacen referencia al horizonte, creadas en colaboración con el dúo de Eindhoven Daniera ter Haar y Christoph Brach, también conocido como Raw Color. Esta mecedora plegable y apilable ha sido producida por la casa de diseño holandesa Weltevree, que se centra en mobiliario e iluminación de exterior de alta calidad y esencial, con una estética singular y un proceso respetuoso con el medio ambiente.",
+   "images": ["https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree_Beachrocker_Studio_4_640x@2x.progressive.jpg?v=1629884843", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree_Beachrocker_Studio_5_640x@2x.progressive.jpg?v=1629884843", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree_Beachrocker_Studio_1_640x@2x.progressive.jpg?v=1629884843", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree_Beachrocker_Studio_2_640x@2x.progressive.jpg?v=1629884843", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree_Beachrocker_Studio_6_640x@2x.progressive.jpg?v=1647600492", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Weltevree_Beachrocker_Studio_3_640x@2x.progressive.jpg?v=1647600492"],
+   "category": "Exterior",
+   "size": "46 h x 21.7 w x 3.9 d (117x55x10cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 51,
+   "title": "Woodstock Trolley",
+   "price": 475,
+   "description": "Es dudoso que haya una forma más elegante de transportar y almacenar leña. Woodstock Frame, un elegante contenedor para apilar troncos, y Trolley, para trasladar el suministro con facilidad, están disponibles por separado o como un conjunto. El carro tiene pequeñas ranuras y ganchos integrados para encajar el Frame y transportar con seguridad cargas más grandes, como cajas apiladas o incluso el Outdooroven de Weltevree. El dúo minimalista del diseñador Dirk Wynants está inteligentemente elaborado en acero galvanizado y con recubrimiento de polvo negro.",
+   "images": ["https://cdn.shopify.com/s/files/1/0012/2005/1002/products/03_2a8ddecd-7ae7-47d7-97d7-cba1ba3bfc81_640x@2x.progressive.jpg?v=1629799156", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/04_3470ee59-0113-4712-92b4-1f3bb7914a20_640x@2x.progressive.jpg?v=1573949691", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/01_2a16d2ae-6c3e-4a3d-a032-fc21721eeeff_640x@2x.progressive.jpg?v=1632396613", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Trolly_640x@2x.progressive.jpg?v=1629799269", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/02_734aa3e8-dd7d-4274-9060-840c01e38a65_640x@2x.progressive.jpg?v=1632396620", "https://cdn.shopify.com/s/files/1/0012/2005/1002/products/05_62d9a70a-0a67-460e-b141-683189b7d61e_640x@2x.progressive.jpg?v=1643692992"],
+   "category": "Exterior",
+   "size": "41.3 h x 15 w x 18.1 d (105x38x46cm)",
+   "cantidad": 30,
+},
+
 ]
