@@ -28,14 +28,15 @@ pedidoRouter.get('/',
 // @route GET pedidos/user/:userId
 // @desc Obtener todos los pedidos que ha realizado un usuario
 // @access Private
-pedidoRouter.get('/user/:userId',
+pedidoRouter.get('/user/:userId', authentication,
    
    async (req, res, next) => {
       const { userId } = req.params;
 
       // Traigo el usuario que me proporcionó el token
       let user = await Usuario.findByPk(req.usuario.id);
-      user = user.toJSON();
+     /*  user = user.toJSON(); */
+     user && (user = user.toJSON());
 
       // Le permito el acceso si el usuario es el propietario del token o es admin
       if (req.usuario.id === parseInt(userId) || user.rol == "2") {
