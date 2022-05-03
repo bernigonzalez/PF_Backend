@@ -8,9 +8,10 @@ const comentarioRouter = Router();
 
 comentarioRouter.post("/", [
    check('descripcion', 'El campo descripcion es requerido').trim().not().isEmpty(),
-   check('productoId', 'El campo productoId es un valor numérico requerido').trim().not().isEmpty().isInt()
+   check('productoId', 'El campo productoId es un valor numérico requerido').trim().not().isEmpty().isInt(),
+   check('rating', 'El campo rating es un valor numérico requerido').trim().not().isEmpty().isInt()
 ], authentication, async (req, res, next) => {
-   const { descripcion, productoId } = req.body;
+   const { descripcion, productoId, rating } = req.body;
    const { id: usuarioId } = req.usuario;
 
    // Validaciones de express-validator
@@ -21,7 +22,7 @@ comentarioRouter.post("/", [
    }
 
    // Si no hay errores, continúo
-   const response = await createComentario(descripcion, usuarioId, productoId);
+   const response = await createComentario(descripcion, usuarioId, productoId, rating);
    if (response.error) return next(response.error);
 
    res.status(201).json(response);
