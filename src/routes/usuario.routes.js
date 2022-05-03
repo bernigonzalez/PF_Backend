@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 const userRouter = Router();
 
 // requerimos el modelo de Usuario
-const { Usuario } = require("../db");
+const { Usuario,Pedido } = require("../db");
 // Requerimos el middleware de autenticación
 const { authentication } = require("../middlewares");
 const adminAuthentication = require("../middlewares/adminAuthentication");
@@ -338,11 +338,26 @@ userRouter.put("/updateImg",/*  [
 // @access Private admin
 userRouter.put("/block/:userId",   async (req, res, next) => {
   try {
+    const pedidoEncontrado = await Pedido.findOne({where: {
+      usuarioId: req.params.userId
+    }
+  })
+   
+  const estPedido = pedidoEncontrado?.dataValues.status;
+  
+  if(estPedido){
+    if(estPedido==='COMPLETADO'||estPedido==='RECHAZADO'){
+      await Usuario.update({ rol: "3" }, { where: { id: req.params.userId } });
+      res.send('Usuario bloqueado')
+    }else{
+      res.send(`El usuario tiene un pedido en espera no ha podido ser bloqueado`)
+    }
+  }else{
     await Usuario.update({ rol: "3" }, { where: { id: req.params.userId } });
-
-    res.end();
+    res.send('Usuario bloqueado')
+  }
   } catch (error) {
-    cosole.log(error);
+    console.log(error);
     return next({ status: 500, message: "No se ha podido bloquear al usuario" });
   }
 });
