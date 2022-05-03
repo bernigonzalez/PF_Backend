@@ -34,11 +34,11 @@ pedidoRouter.get('/user/:userId',
       const { userId } = req.params;
 
       // Traigo el usuario que me proporcionó el token
-      let user = await Usuario.findByPk(req.usuario.id);
+      let user = await Usuario.findByPk(parseInt(userId));
       user = user.toJSON();
 
       // Le permito el acceso si el usuario es el propietario del token o es admin
-      if (req.usuario.id === parseInt(userId) || user.rol == "2") {
+      if ( user.rol == "1" || user.rol == "2") {
          let get = await getPedidosByUsuario(userId);
          if (get.error) return next(get.error);
          return res.json(get);
