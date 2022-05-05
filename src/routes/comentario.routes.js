@@ -36,14 +36,49 @@ comentarioRouter.get("/", async (req, res, next) => {
    res.json(response);
 });
 
-
+//obtener TODAS las reviews de un producto
 comentarioRouter.get("/:productoId", async (req, res, next) => {
    const response = await getAllComentariosByProduct(req.params.productoId);
    if (response.error) return next(response.error);
 
    res.json(response);
-});
+});   
 
+
+// obtener el rating promedio de 1 producto y la cantidad de veces que fue puntuado
+comentarioRouter.get("/rating/:productoId", async (req, res, next) => {
+
+   let sumaRating = 0
+   let cantidadRating = 0
+   let obj = {}
+   const response = await getAllComentariosByProduct(req.params.productoId);
+
+   if (response.length > 0) {
+      for (let i = 0; i < response.length; i++) {
+         sumaRating += response[i].rating
+         cantidadRating += 1
+      }
+   
+      obj = {
+         ratingProm : sumaRating / cantidadRating,
+         cantidadRating
+      }
+
+      res.status(200).json(obj)
+   }else {
+      obj = {
+         ratingProm: null,
+         cantidadRating: null
+      }
+      res.status(200).json(obj)
+   }
+   
+
+
+
+   if (response.error) return next(response.error);
+
+});
 
 // @route PUT comments/:id
 // @desc Actualiza un comentario existente
