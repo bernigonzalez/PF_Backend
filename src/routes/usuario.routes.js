@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 const userRouter = Router();
 
 // requerimos el modelo de Usuario
-const { Usuario,Pedido } = require("../db");
+const { Usuario, Pedido } = require("../db");
 // Requerimos el middleware de autenticación
 const { authentication } = require("../middlewares");
 const adminAuthentication = require("../middlewares/adminAuthentication");
@@ -22,7 +22,7 @@ userRouter.post("/register", [
   check('usuario', 'Incluya un "usuario" valido').isString().trim().not().isEmpty(),
   check('contrasena', 'Incluya una contraseña válida').isString().trim().not().isEmpty(),
   check('email', 'Incluya un email válido').isEmail().exists(),
-  
+
 ], async (req, res, next) => {
   // Validaciones de express-validator
   const errors = validationResult(req);
@@ -194,7 +194,7 @@ userRouter.get("/", authentication, async (req, res, next) => {
 // @route GET api/user/all
 // @desc Me trae todos los usuarios
 // @access Private admin
-userRouter.get("/all",  async (req, res, next) => {
+userRouter.get("/all", async (req, res, next) => {
   try {
     const users = await Usuario.findAll({ attributes: { exclude: ['contrasena'] } });
 
@@ -288,74 +288,75 @@ userRouter.put("/updateImg",/*  [
   check('direccion', 'Incluya una direccion válida').isString().trim().not().isEmpty(),
   check('telefono', 'Incluya un telefono válido').isString().isLength({ min: 8 }),
 ], authentication, */ async (req, res, next) => {
-  // Validaciones de express-validator
- /*  const errors = validationResult(req);
+    // Validaciones de express-validator
+    /*  const errors = validationResult(req);
+   
+     if (!errors.isEmpty()) {
+       return next({ status: 400, errors });
+     } */
 
-  if (!errors.isEmpty()) {
-    return next({ status: 400, errors });
-  } */
+    // Si no hay errores, continúo
+    const {
+      id,
+      img,
+    } = req.body;
 
-  // Si no hay errores, continúo
-  const {
-    id,
-    img,
-  } = req.body;
+    if (!id) return next({ status: 400, message: "El id es Requerido" });
+    /*   let avata = gravatar.url(email, {
+        s: "200", //size
+        r: "pg", //rate
+        d: "mm",
+      }); */
+    try {
+      /*     let password = await bcrypt.hash(contrasena, 10); */
+      const UserUpdate = await Usuario.update(
+        {
+          avatar: img,
 
-  if (!id) return next({ status: 400, message: "El id es Requerido" });
-/*   let avata = gravatar.url(email, {
-    s: "200", //size
-    r: "pg", //rate
-    d: "mm",
-  }); */
-  try {
-/*     let password = await bcrypt.hash(contrasena, 10); */
-    const UserUpdate = await Usuario.update(
-      {
-        avatar: img,
-
-      },
-      {
-        where: {
-          id: id,
         },
-      }
-    );
-    if (UserUpdate)
-      return res
-        .status(200)
-        .json({ message: "Los Datos fueron Actualizados" });
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      if (UserUpdate)
+        return res
+          .status(200)
+          .json({ message: "Los Datos fueron Actualizados" });
 
-    return res.status(203).json({ message: "Algo Sucedio" });
-  } catch (error) {
-    return next({});
-  }
-});
+      return res.status(203).json({ message: "Algo Sucedio" });
+    } catch (error) {
+      return next({});
+    }
+  });
 
 //////////////////
 
 // @route PUT user/block/:userId
 // @desc Bloquear un usuario
 // @access Private admin
-userRouter.put("/block/:userId",   async (req, res, next) => {
+userRouter.put("/block/:userId", async (req, res, next) => {
   try {
-    const pedidoEncontrado = await Pedido.findOne({where: {
-      usuarioId: req.params.userId
-    }
-  })
-   
-  const estPedido = pedidoEncontrado?.dataValues.status;
-  
-  if(estPedido){
-    if(estPedido==='COMPLETADO'||estPedido==='RECHAZADO'){
+    const pedidoEncontrado = await Pedido.findOne({
+      where: {
+        usuarioId: req.params.userId
+      }
+    })
+
+    const estPedido = pedidoEncontrado?.dataValues.status;
+
+    if (estPedido) {
+      if (estPedido === 'COMPLETADO' || estPedido === 'RECHAZADO') {
+        await Usuario.update({ rol: "3" }, { where: { id: req.params.userId } });
+        res.send('Usuario bloqueado')
+      } else {
+        res.send(`El usuario tiene un pedido en espera no ha podido ser deshabilitado`)
+      }
+    } else {
       await Usuario.update({ rol: "3" }, { where: { id: req.params.userId } });
       res.send('Usuario bloqueado')
-    }else{
-      res.send(`El usuario tiene un pedido en espera no ha podido ser bloqueado`)
     }
-  }else{
-    await Usuario.update({ rol: "3" }, { where: { id: req.params.userId } });
-    res.send('Usuario bloqueado')
-  }
   } catch (error) {
     console.log(error);
     return next({ status: 500, message: "No se ha podido bloquear al usuario" });
@@ -370,12 +371,30 @@ userRouter.put("/unlock/:userId", async (req, res, next) => {
   try {
     await Usuario.update({ rol: "1" }, { where: { id: req.params.userId } });
 
-    res.end();
+    res.send('Usuario desbloqueado');
   } catch (error) {
     cosole.log(error);
     return next({ status: 500, message: "No se ha podido desbloquear al usuario" });
   }
 });
+
+userRouter.get("/getUserById/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const userById = await Usuario.findByPk(id
+      // include: [{
+      //   model: Pedido,
+      //   attributes: [],
+      //   through: {
+      //     attributes: [],
+      //   }
+      // }]
+    )
+    res.send(userById)
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 
 
