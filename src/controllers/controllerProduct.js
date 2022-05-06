@@ -99,7 +99,7 @@ const getAllProductosByCategory = async (categoriaId) => {
 }
 
 
-const postProducto = async (title, price, description, size, categoriaId, images, cantidad) => {
+const postProducto = async (title, price, description, category, image, cantidad) => {
   try {
     let exist = await Producto.findOne({ where: { title } });
 
@@ -109,9 +109,8 @@ const postProducto = async (title, price, description, size, categoriaId, images
       title,
       price,
       description,
-      size,
-      categoriaId,
-      images,
+      categoriaId: category,
+      image,
       cantidad
     });
 

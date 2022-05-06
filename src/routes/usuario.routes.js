@@ -40,7 +40,6 @@ userRouter.post("/register", [
     pais,
     provincia,
     direccion,
-    ciudad,
     telefono,
   } = req.body;
 
@@ -69,7 +68,6 @@ userRouter.post("/register", [
       provincia,
       direccion,
       telefono,
-      ciudad,
       avatar,
       rol: 1,
     };
@@ -334,46 +332,7 @@ userRouter.put("/updateImg",/*  [
 });
 
 //////////////////
-userRouter.post("/updateOrder",async (req, res, next) => {
 
-  const {
-    id,
-    username,
-    address,
-    phone,
-    contactName,
-    city
-  } = req.body;
-
-  if (!id) return next({ status: 400, message: "El id es Requerido" });
-
-  try {
-
-    const UserUpdate = await Usuario.update(
-      {
-        usuario: username,
-        nombre:contactName,
-        telefono:phone,
-        direccion: address,
-        ciudad: city,
-
-      },
-      {
-        where: {
-          id: id,
-        },
-      }
-    );
-    if (UserUpdate)
-      return res
-        .status(200)
-        .json({ message: "Los Datos fueron Actualizados" });
-
-    return res.status(203).json({ message: "Algo Sucedio" });
-  } catch (error) {
-    return next({});
-  }
-});
 // @route PUT user/block/:userId
 // @desc Bloquear un usuario
 // @access Private admin

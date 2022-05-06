@@ -1,7 +1,7 @@
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 
-const {PENDIENTE , ENPROCESO ,ENVIADO, ENTREGADO} = require("../data/constantes");
+const { COMPLETADO, PENDIENTE } = require("../data/constantes");
 
 module.exports = (sequelize, DataTypes) => {
    // defino el modelo
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
          allowNull: false,
       },
       status: {
-         type: DataTypes.ENUM(PENDIENTE,ENPROCESO, ENVIADO, ENTREGADO),
+         type: DataTypes.ENUM(PENDIENTE, COMPLETADO),
          allowNull: false,
          defaultValue: PENDIENTE
       },

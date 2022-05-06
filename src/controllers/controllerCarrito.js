@@ -6,9 +6,7 @@ async function carritoPost(req, res, next) {
   try {
     const { id: usuarioId } = req.usuario;
 
-    const nuevoCarrito = await Carrito.findOrCreate({
-            where:{usuarioId }
-        });
+    const nuevoCarrito = await Carrito.create({ usuarioId });
 
     return res.status(201).json(nuevoCarrito);
 
