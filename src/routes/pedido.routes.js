@@ -57,10 +57,9 @@ pedidoRouter.get('/:pedidoId',
    
    async (req, res, next) => {
       const { pedidoId } = req.params;
-
       let get = await getPedidosById(pedidoId);
       if (get.error) return next(get.error);
-
+      console.log(get)
       return res.json(get);
    }
 )
