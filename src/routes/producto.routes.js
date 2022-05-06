@@ -50,25 +50,25 @@ productRouter.get('/category/:categoriaId', async (req, res, next) => {
 // @route POST products/
 // @desc Crear un nuevo producto con la información raída por body
 // @access Private Admin
-productRouter.post('/', [
+productRouter.post('/', /*[
     check('title', 'El campo "titulo" es requerido').isString().trim().not().isEmpty(),
-    check('image', 'El campo "image" es requerido').isString().trim().not().isEmpty(),
+    check('images', 'El campo "image" es requerido').isArray().trim().not().isEmpty(),
     check('description', 'El campo "description" es requerido y tiene un minimo de 10 caracteres y máximo 250').isString().trim().isLength({ min: 10, max: 250 }),
     check('price', 'El campo "price" es requerido y debe ser un número').not().isEmpty().isNumeric({ min: 1 }),
-    check('category', 'El campo "category" es requerido y debe ser un id').isInt({ min: 1 }),
+    check('category', 'El campo "category" es requerido y debe ser un id').isString(),isInt({ min: 1 }),/
     check('cantidad', 'El campo "cantidad" es requerido y debe ser un número entero').isInt({ min: 1 }),
-],  async (req, res, next) => {
+],*/  async (req, res, next) => {
     // Validaciones de express-validator
-    const errors = validationResult(req);
+    /*const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
         return next({ status: 400, errors });
-    }
+    }*/
 
     // Si no hay errores, continúo
-    const { title, price, description, category, image, cantidad } = req.body
+    const { title, price, description, size, categoriaId, images, cantidad } = req.body
 
-    let post = await postProducto(title, price, description, category, image, cantidad);
+    let post = await postProducto(title, price, description, size, categoriaId, images, cantidad);
     if (post.error) return next(post.error);
 
     res.status(201).json(post);
