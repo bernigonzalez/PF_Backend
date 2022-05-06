@@ -1,13 +1,13 @@
 const { Router } = require('express');
 const { getAllPedidos, getPedidosByUsuario, createPedido, updateStatusPedido, deletePedido, getPedidosById } = require('../controllers/controllerPedido');
-const { Usuario } = require('../db');
+const { Usuario ,Pedido } = require('../db');
 const pedidoRouter = Router();
 const { check, validationResult } = require('express-validator');
 
 // Requerimos los middlewares de autenticación
 const { authentication, adminAuthentication } = require("../middlewares");
-const { PENDIENTE, COMPLETADO } = require('../data/constantes');
 
+const {PENDIENTE , ENPROCESO ,ENVIADO, ENTREGADO} = require("../data/constantes");
 
 // @route GET pedidos/
 // @desc Obtener todos los pedidos realizados o filtrar por fecha si se especifica
@@ -79,7 +79,7 @@ pedidoRouter.post('/', [
       return res.length === 0;
    })
 ],
-   
+   authentication,
    async (req, res, next) => {
       // Validaciones de express-validator
       const errors = validationResult(req);
@@ -108,8 +108,8 @@ pedidoRouter.post('/', [
 // @desc Actualizar el estado de un pedido
 // @access Private Admin
 pedidoRouter.put('/:pedidoId', [
-   check('status', `El campo "status" es requerido y debe ser igual a ${PENDIENTE} o ${COMPLETADO}`).isString().trim().custom(status =>
-      [PENDIENTE, COMPLETADO].includes(status)
+   check('status', `El campo "status" es requerido y debe ser igual a ${PENDIENTE} o ${ENVIADO} o ${ENPROCESO} o ${ENTREGADO}`).isString().trim().custom(status =>
+      [PENDIENTE, ENVIADO ,ENPROCESO, ENTREGADO].includes(status)
    ),
 ],
    
@@ -146,6 +146,25 @@ pedidoRouter.delete('/:pedidoId', async (req, res, next) => {
    if (deleted.error) return next(deleted.error);
 
    res.status(204).end();
+})
+
+pedidoRouter.post('/update' , async (req ,res) => {
+   const {idPedido , status} = req.body
+   console.log(idPedido , status)
+   try {
+    const statusUpdate =  await Pedido.update({
+         pagado: status
+      }, {
+         where: {
+            id: idPedido
+         }
+      });
+
+     res.status(200).json(statusUpdate)
+   } catch (error) {
+      console.log(error);
+     res.status(404).send('pedido no encontrado')
+   }
 })
 
 module.exports = pedidoRouter;

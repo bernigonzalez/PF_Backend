@@ -27,7 +27,7 @@ const mapPedido = async (el) => {
       e.producto = e.Producto.title;
       e.precioUnitario = e.Producto.price;
       e.pedidoId = e.id;
-
+      
       delete e.Producto;
       delete e.id;
 
@@ -48,7 +48,7 @@ module.exports = {
             return Producto.findAll({
                // Me aseguro de que al menos haya un producto del solicitado (que esté en stock)
                attributes:
-                  ["title", "price", "cantidad", "id"],
+                  ["title", "price", "cantidad", "id" , "images"],
                where: {
                   [Op.and]: [
                      {
