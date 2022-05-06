@@ -13,7 +13,7 @@
     back_urls: {
       failure: "/failure",
       pending: "/pending",
-      success: "http://localhost:3000/home"
+      success: "http://localhost:3000/pago"
     },
     payment_methods: {
         excluded_payment_types: [

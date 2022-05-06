@@ -1,7 +1,7 @@
 const { Comentario, Pedido } = require("../db");
 const { Op } = require('sequelize');
 
-const createComentario = async (descripcion, usuarioId, productoId) => {
+const createComentario = async (descripcion, usuarioId, productoId, rating) => {
    try {
 
       let comentarioExists = await Comentario.findOne({
@@ -18,7 +18,7 @@ const createComentario = async (descripcion, usuarioId, productoId) => {
       });
       if (comentarioExists) return { error: { status: 400, message: "Solo puede agregar un comentario por producto" } };
 
-      let newComentario = await Comentario.create({ descripcion, usuarioId, productoId });
+      let newComentario = await Comentario.create({ descripcion, usuarioId, productoId, rating });
 
       return newComentario;
    } catch (error) {

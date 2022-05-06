@@ -69,7 +69,7 @@ pedidoRouter.get('/:pedidoId',
 // @route POST pedidos/
 // @desc Realizar un pedido
 // @access Private
-pedidoRouter.post('/', [
+pedidoRouter.post('/',  authentication, [
    check('pedidos', 'El campo "pedidos" es requerido y debe ser un array con la forma [{productoId: 1, cantidad: 2}]').isArray({ min: 1 }).custom(pedidos => {
       let res;
       res = pedidos.filter(e => {
