@@ -39,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
 
     },
+    ciudad: {
+      type: DataTypes.STRING,
+
+    },
     rol: {
       // 1 -> normal; 2 -> admin
       type: DataTypes.ENUM("1", "2", "3"),

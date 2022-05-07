@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const { getAllPedidos, getPedidosByUsuario, createPedido, updateStatusPedido, deletePedido, getPedidosById } = require('../controllers/controllerPedido');
-const { Usuario } = require('../db');
+const { Usuario ,Pedido} = require('../db');
 const pedidoRouter = Router();
 const { check, validationResult } = require('express-validator');
 
 // Requerimos los middlewares de autenticación
 const { authentication, adminAuthentication } = require("../middlewares");
-const { PENDIENTE, COMPLETADO } = require('../data/constantes');
+const {PENDIENTE , ENPROCESO ,ENVIADO, ENTREGADO , RECHAZADO} = require("../data/constantes");
 
 
 // @route GET pedidos/
@@ -108,8 +108,8 @@ pedidoRouter.post('/',  authentication, [
 // @desc Actualizar el estado de un pedido
 // @access Private Admin
 pedidoRouter.put('/:pedidoId', [
-   check('status', `El campo "status" es requerido y debe ser igual a ${PENDIENTE} o ${COMPLETADO}`).isString().trim().custom(status =>
-      [PENDIENTE, COMPLETADO].includes(status)
+   check('status', `El campo "status" es requerido y debe ser igual a ${PENDIENTE} o ${ENVIADO} o ${ENPROCESO} o ${ENTREGADO} o ${RECHAZADO}`).isString().trim().custom(status =>
+      [PENDIENTE, ENVIADO ,ENPROCESO, ENTREGADO , RECHAZADO].includes(status)
    ),
 ],
    
@@ -132,6 +132,24 @@ pedidoRouter.put('/:pedidoId', [
       return res.json(get);
    }
 );
+ pedidoRouter.post('/update' , async (req ,res) => {
+   const {idPedido , status} = req.body
+   console.log(idPedido , status)
+   try {
+    const statusUpdate =  await Pedido.update({
+         pagado: status
+      }, {
+         where: {
+            id: idPedido
+         }
+      });
+
+     res.status(200).json(statusUpdate)
+   } catch (error) {
+      console.log(error);
+     res.status(404).send('pedido no encontrado')
+   }
+})
 
 
 

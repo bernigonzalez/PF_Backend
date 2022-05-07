@@ -87,7 +87,7 @@ module.exports = {
 
          // Calculo el valor total de la compra, para ello multiplico la cantidad de productos que vendo por el precio del producto
          let total = Math.round(pedidoFinal.reduce((prev, current) => (current.price * current.cantidad) + prev, 0) * 100) / 100;
-
+           total = total >= 7000 ? total : total + 150
          // Ahora creo el pedido
          let pedidoAux = await Pedido.create({ usuarioId: userId, total, fechaCreacion: new Date() });
          let pedidoRealizado = pedidoAux.toJSON();

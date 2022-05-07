@@ -38,6 +38,7 @@ userRouter.post("/register", [
     contrasena,
     email,
     pais,
+    ciudad,
     provincia,
     direccion,
     telefono,
@@ -64,6 +65,7 @@ userRouter.post("/register", [
       usuario,
       contrasena,
       email,
+      ciudad,
       pais,
       provincia,
       direccion,
@@ -234,6 +236,7 @@ userRouter.put("/update", [
     usuario,
     contrasena,
     email,
+    ciudad,
     pais,
     provincia,
     direccion,
@@ -255,6 +258,7 @@ userRouter.put("/update", [
         usuario,
         contrasena: password,
         email,
+        ciudad,
         pais,
         provincia,
         direccion,
@@ -377,6 +381,48 @@ userRouter.put("/unlock/:userId", async (req, res, next) => {
   }
 });
 
+//////////////////
 
+userRouter.post("/updateOrder",async (req, res, next) => {
+
+  const {
+    id,
+    username,
+    address,
+    phone,
+    contactName,
+    city
+  } = req.body;
+
+  if (!id) return next({ status: 400, message: "El id es Requerido" });
+
+  try {
+    console.log()
+    const UserUpdate = await Usuario.update(
+      {
+        usuario: username,
+        nombre:contactName,
+        telefono:phone,
+        direccion: address,
+        ciudad: city,
+
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    console.log(UserUpdate)
+    if (UserUpdate)
+      return res
+        .status(200)
+        .json({ message: "Los Datos fueron Actualizados" });
+
+    return res.status(203).json({ message: "Algo Sucedio" });
+  } catch (error) {
+    return next({});
+  }
+});
 
 module.exports = userRouter;
