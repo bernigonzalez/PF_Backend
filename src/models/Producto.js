@@ -15,11 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT,
       allowNull: true,
-    },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+     },
+    // category: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    // },
     images: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1
+    },
+    categoriaId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      
     },
 
   }, {

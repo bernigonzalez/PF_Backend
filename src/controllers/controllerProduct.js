@@ -11,7 +11,6 @@ const mapProduct = (foundedProduct) => {
     foundedProduct.category = category;
   }
   delete foundedProduct.Categorium;
-
   return foundedProduct;
 }
 
@@ -125,7 +124,9 @@ const postProducto = async (title, price, description, size, categoriaId, images
 
 const putProducto = async (title, price, description, category, image, cantidad, id) => {
   try {
+    console.log("category es:", category)
     let update = await Producto.update(
+      
       {
         title: title,
         price: price,
