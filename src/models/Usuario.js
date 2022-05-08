@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     contrasena: {
       type: DataTypes.STRING,
-      allowNull: false,
+     
     },
     email: {
       type: DataTypes.STRING,
@@ -36,6 +36,10 @@ module.exports = (sequelize, DataTypes) => {
 
     },
     telefono: {
+      type: DataTypes.STRING,
+
+    },
+    ciudad: {
       type: DataTypes.STRING,
 
     },
