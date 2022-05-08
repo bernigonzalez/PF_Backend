@@ -377,6 +377,22 @@ userRouter.put("/unlock/:userId", async (req, res, next) => {
   }
 });
 
-
+userRouter.get("/getUserById/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const userById = await Usuario.findByPk(id
+      // include: [{
+      //   model: Pedido,
+      //   attributes: [],
+      //   through: {
+      //     attributes: [],
+      //   }
+      // }]
+    )
+    res.send(userById)
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 module.exports = userRouter;
