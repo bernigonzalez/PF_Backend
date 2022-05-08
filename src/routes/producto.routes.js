@@ -87,16 +87,16 @@ productRouter.put('/rate', [
 // @access Private Admin
 productRouter.put('/:id', [
     check('title', 'El campo "titulo" es requerido').isString().trim().not().isEmpty(),
-    check('image', 'El campo "image" es requerido').isString().trim().not().isEmpty(),
-    check('description', 'El campo "description" es requerido y tiene un minimo de 10 caracteres y máximo 250').isString().trim().isLength({ min: 10, max: 250 }),
+    check('description', 'El campo "description" es requerido y tiene un minimo de 10 caracteres ').isString().trim().isLength({ min: 10}),
     check('price', 'El campo "price" es requerido y debe ser un número').not().isEmpty().isNumeric({ min: 1 }),
-    check('category', 'El campo "category" es requerido y debe ser un id').isInt({ min: 1 }),
     check('cantidad', 'El campo "cantidad" es requerido y debe ser un número entero').isInt({ min: 1 }),
 ], async (req, res, next) => {
     // Validaciones de express-validator
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+        console.log("body;", req.body)
+        console.log("vine con errores del front")
         return next({ status: 400, errors });
     }
 
