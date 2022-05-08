@@ -80,7 +80,7 @@ userRouter.post("/register", [
     // Creamos el nuevo usuario y lo guardamos en la DB
     try {
       user = await Usuario.create(user);
-      // console.log(user.toJSON());
+      
     } catch (error) {
       // no se ha podido crear el usuario
       console.log(error);

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     contrasena: {
       type: DataTypes.STRING,
-      allowNull: false,
+     
     },
     email: {
       type: DataTypes.STRING,
