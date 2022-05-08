@@ -14,6 +14,7 @@ const forgotPasswordRouter = require("./forgotPassword.routes");
 const resetPasswordRouter = require("./resetPassword.routes");
 const pagoRouter = require("./mercadoPago.routes")
 const wapRouter = require("./whatsapp.routes")
+const newsletterRouter = require("./newsletter.routes")
 
 
 const router = Router();
@@ -32,5 +33,7 @@ router.use("/password", forgotPasswordRouter);
 router.use("/resetPassword", resetPasswordRouter);
 router.use("/pago", pagoRouter)
 router.use("/whatsapp", wapRouter)
+router.use("/newsletter", newsletterRouter);
+
 
 module.exports = router;
