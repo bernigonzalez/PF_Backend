@@ -22,7 +22,8 @@ const loadUsuarios = async () => {
             email: e.email,
             pais: e.pais,
             provincia: e.provincia,
-            direccion: e.provincia,
+            direccion: e.direccion,
+            ciudad: e.ciudad,
             telefono: e.telefono,
             rol: e.rol,
             avatar
