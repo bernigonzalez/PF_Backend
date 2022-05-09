@@ -32,6 +32,7 @@
     "nodemailer": "^6.7.2",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
+    "socket.io": "^4.5.0",
     "stripe": "^8.202.0"
   },
   "devDependencies": {

@@ -16,6 +16,9 @@ const pagoRouter = require("./mercadoPago.routes")
 const wapRouter = require("./whatsapp.routes")
 const newsletterRouter = require("./newsletter.routes")
 
+const conversationRouter = require("./conversation.routes")
+const messageRouter = require("./message.routes")
+
 const googleRouter = require("./loginGoogle.routes")
 
 const router = Router();
@@ -35,6 +38,10 @@ router.use("/resetPassword", resetPasswordRouter);
 router.use("/pago", pagoRouter)
 router.use("/whatsapp", wapRouter)
 router.use("/newsletter", newsletterRouter);
+
+router.use("/chatconversation", conversationRouter);
+router.use("/chatmessage", messageRouter);
+
 
 
 router.use("/loginGoogle" , googleRouter)

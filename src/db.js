@@ -5,7 +5,7 @@ const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT, DATABASE_URL, ENVIRONMENT } = process.env;
 
 const URL = ENVIRONMENT === "development" ? `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}` : DATABASE_URL;
-console.log("BBDD que estas usando: ", URL)
+console.log("BBDD que estas usando: " , URL)
 const options = ENVIRONMENT === "development" ? {
   logging: false,
   native: false,
@@ -70,6 +70,8 @@ const {
   Ofertas,
   OfertaProducto,
   Newsletter,
+  ChatConversation,
+  ChatMessage,
 } = sequelize.models;
 
 module.exports = {
@@ -85,5 +87,7 @@ module.exports = {
   OfertaProducto,
   Comentario,
   Newsletter,
+  ChatConversation,
+  ChatMessage,
   conn: sequelize, // para importar la conexión { conn } = require('./db.js');
 };
