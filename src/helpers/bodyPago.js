@@ -13,7 +13,7 @@
     back_urls: {
       failure: "/failure",
       pending: "/pending",
-      success: "http://localhost:3000/pago"
+      success: env.process.CORS_URL+ "/pago"
     },
     payment_methods: {
         excluded_payment_types: [
