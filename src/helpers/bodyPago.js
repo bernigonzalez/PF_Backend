@@ -1,4 +1,7 @@
-    const bodyPago = {
+const { CORS_URL } = process.env;
+
+
+const bodyPago = {
     payer_email: process.env.PAYER_EMAIL,
     items: [
       {
@@ -13,7 +16,7 @@
     back_urls: {
       failure: "/failure",
       pending: "/pending",
-      success: env.process.CORS_URL+ "/pago"
+      success: CORS_URL + "/pago"
     },
     payment_methods: {
         excluded_payment_types: [
