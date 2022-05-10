@@ -14,7 +14,7 @@ const bodyPago = {
       }
     ],
     back_urls: {
-      failure: "/failure",
+      failure:  CORS_URL + "/pago",
       pending: "/pending",
       success: CORS_URL + "/pago"
     },

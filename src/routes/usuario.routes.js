@@ -414,7 +414,7 @@ userRouter.post("/updateOrder",async (req, res, next) => {
   if (!id) return next({ status: 400, message: "El id es Requerido" });
 
   try {
-    console.log()
+    console.log(req.body)
     const UserUpdate = await Usuario.update(
       {
         usuario: username,
@@ -431,14 +431,12 @@ userRouter.post("/updateOrder",async (req, res, next) => {
       }
     );
     console.log(UserUpdate)
-    if (UserUpdate)
-      return res
-        .status(200)
-        .json({ message: "Los Datos fueron Actualizados" });
+   
+   return res.status(200).json({ message: "Los Datos fueron Actualizados" });
 
-    return res.status(203).json({ message: "Algo Sucedio" });
+   
   } catch (error) {
-    return next({});
+    return res.status(404).json({ message: "Algo Sucedio" });
   }
 });
 
