@@ -95,6 +95,11 @@ io.on("connection", async (socket) => {
       console.log("han enviado el siguiente mensaje: ", data)  
       socket.to(data.room).emit("receive_message", data) //mandamos la data del mensaje a otros usuarios, que van a estar escuchando en el front el evento 
     })
+
+    socket.on("newConversation", (admin) => {
+      console.log("llego evento newConversation")
+        io.emit("newConversation", admin)
+    })
 } )
 
 module.exports = server;

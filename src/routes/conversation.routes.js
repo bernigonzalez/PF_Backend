@@ -20,11 +20,23 @@ conversationRouter.post("/", async (req, res) => {
     
     let {memberAdmin, memberBuyer} = req.body
     try{
+        let search = await ChatConversation.findAll({
+            where: {
+                memberBuyer
+            }
+        })
+
+
+        if(search.length !== 0) {
+            res.status(200).send("Ya existe la conversacion")
+        }else {
+                
         let newConversation = await ChatConversation.create({
             memberAdmin,
             memberBuyer
         })
         res.status(200).send(newConversation)
+        }
 
     }catch(err){
         res.status(500).json("no se pudo crear la conversacion")
