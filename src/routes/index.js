@@ -20,7 +20,7 @@ const conversationRouter = require("./conversation.routes")
 const messageRouter = require("./message.routes")
 
 const googleRouter = require("./loginGoogle.routes")
-
+const favsRouter = require("./favoritos.routes")
 const router = Router();
 
 // Configuramos los routers
@@ -41,7 +41,7 @@ router.use("/newsletter", newsletterRouter);
 
 router.use("/chatconversation", conversationRouter);
 router.use("/chatmessage", messageRouter);
-
+router.use("/favs", favsRouter)
 
 
 router.use("/loginGoogle" , googleRouter)
