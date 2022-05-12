@@ -39,7 +39,7 @@ const forgotPassword = async (req, res, next) => {
       text: `Ingrese al siguiente link para recuperar la contraseña  http://localhost:3000/resetpassword/${user.id}`
     };
      
-    if(user){
+    
 
     transporter.sendMail(mailOptions, (err, response) => {
       if (err) {
@@ -52,15 +52,10 @@ const forgotPassword = async (req, res, next) => {
       console.log(response)
       res.status(200).json({message:"El email para la recuperacion ha sido enviado"});
     });
-  }else{
-     res.status(404).json({
-      message: "No estás registrado con este email",
-      
-    });
-  }
+  
   } catch (error) {
-    res.status(500).json({
-      message: "Ha ocurrido un error en el servidor",
+    res.status(404).json({
+      message: "No estás registrado con este email",
       error,
     });
   }
