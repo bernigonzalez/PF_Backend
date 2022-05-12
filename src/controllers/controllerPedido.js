@@ -17,7 +17,7 @@ const mapPedido = async (el) => {
       // Hago un inner join del cual solo requiero el title y price
       include: {
          model: Producto,
-         attributes: ["title", "price"]
+         attributes: ["title", "price", "statusProduct"]
       },
    });
 
@@ -26,7 +26,9 @@ const mapPedido = async (el) => {
       e = e.toJSON();
       e.producto = e.Producto.title;
       e.precioUnitario = e.Producto.price;
+      e.status = e.Producto.statusProduct;
       e.pedidoId = e.id;
+      e.statusProduct = e.Producto
 
       delete e.Producto;
       delete e.id;

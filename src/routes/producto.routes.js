@@ -1,6 +1,7 @@
 const { Router } = require('express');
-const { updateRateProducto, getAllProductos, getAllProductosByCategory, getProductoById, postProducto, deleteProducto, putProducto } = require('../controllers/controllerProduct')
+const { updateRateProducto, getAllProductos, getAllProductosByCategory, getProductoById, postProducto, deleteProducto, putProducto, getAllProductosAndDisabled, disabledEnabledProduct } = require('../controllers/controllerProduct')
 const productRouter = Router();
+const {Producto} = require('../db')
 const { check, validationResult } = require('express-validator');
 
 // Requerimos el middleware de autenticación
@@ -108,6 +109,41 @@ productRouter.put('/:id', [
     if (put.error) return next(put.error);
 
     res.json(put);
+})
+
+productRouter.put('/changeStatus/:id',async (req,res,next)=>{
+    const {id} = req.params;
+
+    try {
+        let prod = await Producto.findByPk(id);
+    
+        if (!prod) return { error: { status: 404, message: "Id no válido" } };
+    
+        //console.log(id)
+    
+        const statusProduct = prod?.dataValues.statusProduct;
+        if(statusProduct===false){
+          const status = await Producto.update(
+            {statusProduct:true},
+            {where: { id }
+          })
+          console.log('es false')
+          res.send(status);
+        }else{
+          const status = await Producto.update(
+            {statusProduct:false},
+            {where: { id:id }
+          })
+          console.log('es true')
+          res.send(status);
+        }
+       
+    
+        
+      } catch (error) {
+        console.log(error);
+        return { error: {} }
+      }
 })
 
 
