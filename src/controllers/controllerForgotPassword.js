@@ -18,44 +18,49 @@ const forgotPassword = async (req, res, next) => {
       },
     });
 
-    const token = jwt.sign(
-      {
-        usuario: {
-          id: user.id,
-        },
-      },
-      JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+  
     //user.update({
     //tokenResetPassword: token,
     //});
-
+    
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: `${EMAIL_ADDRESS}`,
-        pass: `${EMAIL_PASSWORD}`,
+        user: `tumobi44@gmail.com`,
+        pass: `nahfpzwtlinfvnwp`,
       },
     });
     // const emailPort = process.env.EMAIL_PORT || 3000;
-
+     
     const mailOptions = {
-      from: `${EMAIL_ADDRESS}`,
+      from: `Mobi <tumobi44@gmail.com>`,
       to: `${user.email}`,
       subject: "Enlace para recuperar su contraseña ",
-      text: `https://ecommerce-pg-henry.herokuapp.com/resetpassword/${user.id}/${token} `,
+      text: `Ingrese al siguiente link para recuperar la contraseña  http://localhost:3000/resetpassword/${user.id}`
     };
+     
+    if(user){
 
     transporter.sendMail(mailOptions, (err, response) => {
       if (err) {
         console.error("Ha ocurrido un error :", err);
+        return  res.status(400).json({
+          message: "Ha ocurrido un error en el envio del email",
+          err,
+        });
       }
-      res.status(200).json("El email para la recuperacion ha sido enviado");
+      console.log(response)
+      res.status(200).json({message:"El email para la recuperacion ha sido enviado"});
     });
+  }else{
+     res.status(404).json({
+      message: "No estás registrado con este email",
+      
+    });
+  }
   } catch (error) {
     res.status(500).json({
-      message: "Ha ocurrido un error",
+      message: "Ha ocurrido un error en el servidor",
       error,
     });
   }
