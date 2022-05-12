@@ -18,7 +18,10 @@ async function getAllProductos(title) {
   try {
     if (!title) {
       // const ProductAll = await Producto.findAll({ include: Categoria });
-      let productAll = await Producto.findAll({ include: Categoria });
+      let productAll = await Producto.findAll(
+        {
+          include: Categoria
+        });
       productAll = productAll.map(prod => mapProduct(prod));
 
       return productAll;
@@ -49,6 +52,7 @@ async function getAllProductos(title) {
     return { error: {} };
   }
 }
+
 
 const getProductoById = async (id) => {
   try {
@@ -126,7 +130,7 @@ const putProducto = async (title, price, description, category, image, cantidad,
   try {
     console.log("category es:", category)
     let update = await Producto.update(
-      
+
       {
         title: title,
         price: price,
@@ -208,6 +212,35 @@ async function updateRateProducto(req, res, next) {
   }
 }
 
+const disabledEnabledProduct = async (id) => {
+  try {
+    let prod = await Producto.findByPk(id);
+
+    if (!prod) return { error: { status: 404, message: "Id no válido" } };
+
+    // console.log(id)
+
+    const statusProduct = prod?.dataValues.statusProduct;
+    if(statusProduct===false){
+      prod = await Producto.update(
+        {statusProduct:false},
+        {where: { id }
+      })
+    }else{
+      prod = await Producto.update(
+        {statusProduct:true},
+        {where: { id }
+      })
+    }
+   
+
+    return;
+  } catch (error) {
+    console.log(error);
+    return { error: {} }
+  }
+}
+
 
 
 module.exports = {
@@ -217,7 +250,8 @@ module.exports = {
   deleteProducto,
   putProducto,
   getAllProductosByCategory,
-  updateRateProducto
+  updateRateProducto,
+  disabledEnabledProduct
 }
 
 
