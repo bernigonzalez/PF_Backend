@@ -99,28 +99,28 @@ io.on("connection", async (socket) => {
     
 
     socket.on("notif_newMessage", (data) => {
-      console.log("llego evento notif_newMessage")
         io.emit("notif_newMessage", data)
     })
 
     socket.on("notif_newReview", (data) => {
-      console.log("llego evento notif_newReview")
         io.emit("notif_newReview", data)
     })
     
     socket.on("notif_newOrder", (data) => {
-      console.log("llego evento notif_newOrder")
         io.emit("notif_newOrder", data)
     })
 
     socket.on("notif_newRegister", (data) => {
-      console.log("llego evento notif_newRegister")
         io.emit("notif_newRegister", data)
+    })
+
+    socket.on("notif_newOrderStatus", (data) => {
+      console.log("llego evento notif_newOrderStatus")
+        io.emit("notif_newOrderStatus", data)
     })
 
 
     socket.on("newConversation", (admin) => {
-      console.log("llego evento newConversation")
         io.emit("newConversation", admin)
     })
 } )
