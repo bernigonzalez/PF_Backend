@@ -91,13 +91,36 @@ io.on("connection", async (socket) => {
       console.log("User Join Chat number: ", data)
     })
 
-    socket.on("send_message", (data) => { //escuchamos al evento "send_message", recibimos la data y la enviamos al cliente neuvamente
-      console.log("han enviado el siguiente mensaje: ", data)  
+    socket.on("send_message", (data) => { //escuchamos al evento "send_message", recibimos la data y la enviamos al cliente neuvamente 
       socket.to(data.room).emit("receive_message", data) //mandamos la data del mensaje a otros usuarios, que van a estar escuchando en el front el evento 
+      
     })
 
+    
+
+    socket.on("notif_newMessage", (data) => {
+        io.emit("notif_newMessage", data)
+    })
+
+    socket.on("notif_newReview", (data) => {
+        io.emit("notif_newReview", data)
+    })
+    
+    socket.on("notif_newOrder", (data) => {
+        io.emit("notif_newOrder", data)
+    })
+
+    socket.on("notif_newRegister", (data) => {
+        io.emit("notif_newRegister", data)
+    })
+
+    socket.on("notif_newOrderStatus", (data) => {
+      console.log("llego evento notif_newOrderStatus")
+        io.emit("notif_newOrderStatus", data)
+    })
+
+
     socket.on("newConversation", (admin) => {
-      console.log("llego evento newConversation")
         io.emit("newConversation", admin)
     })
 } )

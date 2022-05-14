@@ -90,7 +90,7 @@ productRouter.put('/:id', [
     check('title', 'El campo "titulo" es requerido').isString().trim().not().isEmpty(),
     check('description', 'El campo "description" es requerido y tiene un minimo de 10 caracteres ').isString().trim().isLength({ min: 10}),
     check('price', 'El campo "price" es requerido y debe ser un número').not().isEmpty().isNumeric({ min: 1 }),
-    check('cantidad', 'El campo "cantidad" es requerido y debe ser un número entero').isInt({ min: 1 }),
+    check('cantidad', 'El campo "cantidad" es requerido y debe ser un número entero').isInt({ min: 0 }),
 ], async (req, res, next) => {
     // Validaciones de express-validator
     const errors = validationResult(req);
