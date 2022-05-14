@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const { response } = require("express");
 require("dotenv").config();
-const { JWT_SECRET, EMAIL_ADDRESS, EMAIL_PASSWORD } = process.env;
+const { CORS_URL } = process.env;
 
 const forgotPassword = async (req, res, next) => {
   if (req.body.email == "") {
@@ -36,7 +36,7 @@ const forgotPassword = async (req, res, next) => {
       from: `Mobi <tumobi44@gmail.com>`,
       to: `${user.email}`,
       subject: "Enlace para recuperar su contraseña ",
-      text: `Ingrese al siguiente link para recuperar la contraseña  http://localhost:3000/resetpassword/${user.id}`
+      text: `Ingrese al siguiente link para recuperar la contraseña  ${CORS_URL}/resetpassword/${user.id}`
     };
      
     
