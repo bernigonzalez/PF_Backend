@@ -72,7 +72,8 @@ const {
   Newsletter,
   ChatConversation,
   ChatMessage,
-  Favoritos
+  Favoritos,
+  Notifications,
 } = sequelize.models;
 
 module.exports = {
@@ -91,5 +92,6 @@ module.exports = {
   ChatConversation,
   ChatMessage,
   Favoritos,
+  Notifications,
   conn: sequelize, // para importar la conexión { conn } = require('./db.js');
 };
