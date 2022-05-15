@@ -17,7 +17,7 @@ const mapPedido = async (el) => {
       // Hago un inner join del cual solo requiero el title y price
       include: {
          model: Producto,
-         attributes: ["title", "price"]
+         attributes: ["title", "price", "statusProduct"]
       },
    });
 
@@ -26,7 +26,9 @@ const mapPedido = async (el) => {
       e = e.toJSON();
       e.producto = e.Producto.title;
       e.precioUnitario = e.Producto.price;
+      e.status = e.Producto.statusProduct;
       e.pedidoId = e.id;
+      e.statusProduct = e.Producto
 
       delete e.Producto;
       delete e.id;
@@ -87,7 +89,7 @@ module.exports = {
 
          // Calculo el valor total de la compra, para ello multiplico la cantidad de productos que vendo por el precio del producto
          let total = Math.round(pedidoFinal.reduce((prev, current) => (current.price * current.cantidad) + prev, 0) * 100) / 100;
-
+           total = total >= 7000 ? total : total + 150
          // Ahora creo el pedido
          let pedidoAux = await Pedido.create({ usuarioId: userId, total, fechaCreacion: new Date() });
          let pedidoRealizado = pedidoAux.toJSON();

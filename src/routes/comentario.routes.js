@@ -8,9 +8,10 @@ const comentarioRouter = Router();
 
 comentarioRouter.post("/", [
    check('descripcion', 'El campo descripcion es requerido').trim().not().isEmpty(),
-   check('productoId', 'El campo productoId es un valor numérico requerido').trim().not().isEmpty().isInt()
+   check('productoId', 'El campo productoId es un valor numérico requerido').trim().not().isEmpty().isInt(),
+   check('rating', 'El campo rating es un valor numérico requerido').trim().not().isEmpty().isInt()
 ], authentication, async (req, res, next) => {
-   const { descripcion, productoId } = req.body;
+   const { descripcion, productoId, rating } = req.body;
    const { id: usuarioId } = req.usuario;
 
    // Validaciones de express-validator
@@ -21,7 +22,7 @@ comentarioRouter.post("/", [
    }
 
    // Si no hay errores, continúo
-   const response = await createComentario(descripcion, usuarioId, productoId);
+   const response = await createComentario(descripcion, usuarioId, productoId, rating);
    if (response.error) return next(response.error);
 
    res.status(201).json(response);
@@ -35,14 +36,49 @@ comentarioRouter.get("/", async (req, res, next) => {
    res.json(response);
 });
 
-
+//obtener TODAS las reviews de un producto
 comentarioRouter.get("/:productoId", async (req, res, next) => {
    const response = await getAllComentariosByProduct(req.params.productoId);
    if (response.error) return next(response.error);
 
    res.json(response);
-});
+});   
 
+
+// obtener el rating promedio de 1 producto y la cantidad de veces que fue puntuado
+comentarioRouter.get("/rating/:productoId", async (req, res, next) => {
+
+   let sumaRating = 0
+   let cantidadRating = 0
+   let obj = {}
+   const response = await getAllComentariosByProduct(req.params.productoId);
+
+   if (response.length > 0) {
+      for (let i = 0; i < response.length; i++) {
+         sumaRating += response[i].rating
+         cantidadRating += 1
+      }
+   
+      obj = {
+         ratingProm : sumaRating / cantidadRating,
+         cantidadRating
+      }
+
+      res.status(200).json(obj)
+   }else {
+      obj = {
+         ratingProm: null,
+         cantidadRating: null
+      }
+      res.status(200).json(obj)
+   }
+   
+
+
+
+   if (response.error) return next(response.error);
+
+});
 
 // @route PUT comments/:id
 // @desc Actualiza un comentario existente

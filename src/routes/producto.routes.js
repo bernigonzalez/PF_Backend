@@ -1,6 +1,7 @@
 const { Router } = require('express');
-const { updateRateProducto, getAllProductos, getAllProductosByCategory, getProductoById, postProducto, deleteProducto, putProducto } = require('../controllers/controllerProduct')
+const { updateRateProducto, getAllProductos, getAllProductosByCategory, getProductoById, postProducto, deleteProducto, putProducto, getAllProductosAndDisabled, disabledEnabledProduct } = require('../controllers/controllerProduct')
 const productRouter = Router();
+const {Producto} = require('../db')
 const { check, validationResult } = require('express-validator');
 
 // Requerimos el middleware de autenticación
@@ -50,30 +51,28 @@ productRouter.get('/category/:categoriaId', async (req, res, next) => {
 // @route POST products/
 // @desc Crear un nuevo producto con la información raída por body
 // @access Private Admin
-productRouter.post('/', [
+productRouter.post('/', /*[
     check('title', 'El campo "titulo" es requerido').isString().trim().not().isEmpty(),
-    check('image', 'El campo "image" es requerido').isString().trim().not().isEmpty(),
+    check('images', 'El campo "image" es requerido').isArray().trim().not().isEmpty(),
     check('description', 'El campo "description" es requerido y tiene un minimo de 10 caracteres y máximo 250').isString().trim().isLength({ min: 10, max: 250 }),
     check('price', 'El campo "price" es requerido y debe ser un número').not().isEmpty().isNumeric({ min: 1 }),
-    check('category', 'El campo "category" es requerido y debe ser un id').isInt({ min: 1 }),
+    check('category', 'El campo "category" es requerido y debe ser un id').isString(),isInt({ min: 1 }),/
     check('cantidad', 'El campo "cantidad" es requerido y debe ser un número entero').isInt({ min: 1 }),
-],  async (req, res, next) => {
-    // Validaciones de express-validator
-    const errors = validationResult(req);
+],*/  async (req, res, next) => {
+        // Validaciones de express-validator
+        /*const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return next({ status: 400, errors });
+        }*/
 
-    if (!errors.isEmpty()) {
-        return next({ status: 400, errors });
-    }
+        // Si no hay errores, continúo
+        const { title, price, description, size, categoriaId, images, cantidad } = req.body
 
-    // Si no hay errores, continúo
-    const { title, price, description, category, image, cantidad } = req.body
+        let post = await postProducto(title, price, description, size, categoriaId, images, cantidad);
+        if (post.error) return next(post.error);
 
-    let post = await postProducto(title, price, description, category, image, cantidad);
-    if (post.error) return next(post.error);
-
-    res.status(201).json(post);
-})
-
+        res.status(201).json(post);
+    })
 
 // @route PUT productos/rate
 // @desc Actualizar el rate y count de un producto con id recibido por body
@@ -89,16 +88,16 @@ productRouter.put('/rate', [
 // @access Private Admin
 productRouter.put('/:id', [
     check('title', 'El campo "titulo" es requerido').isString().trim().not().isEmpty(),
-    check('image', 'El campo "image" es requerido').isString().trim().not().isEmpty(),
-    check('description', 'El campo "description" es requerido y tiene un minimo de 10 caracteres y máximo 250').isString().trim().isLength({ min: 10, max: 250 }),
+    check('description', 'El campo "description" es requerido y tiene un minimo de 10 caracteres ').isString().trim().isLength({ min: 10}),
     check('price', 'El campo "price" es requerido y debe ser un número').not().isEmpty().isNumeric({ min: 1 }),
-    check('category', 'El campo "category" es requerido y debe ser un id').isInt({ min: 1 }),
-    check('cantidad', 'El campo "cantidad" es requerido y debe ser un número entero').isInt({ min: 1 }),
-],  async (req, res, next) => {
+    check('cantidad', 'El campo "cantidad" es requerido y debe ser un número entero').isInt({ min: 0 }),
+], async (req, res, next) => {
     // Validaciones de express-validator
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+        console.log("body;", req.body)
+        console.log("vine con errores del front")
         return next({ status: 400, errors });
     }
 
@@ -110,6 +109,41 @@ productRouter.put('/:id', [
     if (put.error) return next(put.error);
 
     res.json(put);
+})
+
+productRouter.put('/changeStatus/:id',async (req,res,next)=>{
+    const {id} = req.params;
+
+    try {
+        let prod = await Producto.findByPk(id);
+    
+        if (!prod) return { error: { status: 404, message: "Id no válido" } };
+    
+        //console.log(id)
+    
+        const statusProduct = prod?.dataValues.statusProduct;
+        if(statusProduct===false){
+          const status = await Producto.update(
+            {statusProduct:true},
+            {where: { id }
+          })
+          console.log('es false')
+          res.send(status);
+        }else{
+          const status = await Producto.update(
+            {statusProduct:false},
+            {where: { id:id }
+          })
+          console.log('es true')
+          res.send(status);
+        }
+       
+    
+        
+      } catch (error) {
+        console.log(error);
+        return { error: {} }
+      }
 })
 
 

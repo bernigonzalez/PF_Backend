@@ -12,7 +12,16 @@ const offersRouter = require("./oferta.routes");
 const comentariosRouter = require("./comentario.routes");
 const forgotPasswordRouter = require("./forgotPassword.routes");
 const resetPasswordRouter = require("./resetPassword.routes");
+const pagoRouter = require("./mercadoPago.routes")
+const wapRouter = require("./whatsapp.routes")
+const newsletterRouter = require("./newsletter.routes")
 
+const conversationRouter = require("./conversation.routes")
+const messageRouter = require("./message.routes")
+
+const googleRouter = require("./loginGoogle.routes")
+const favsRouter = require("./favoritos.routes")
+const adminRouter = require("./admin.routes")
 const router = Router();
 
 // Configuramos los routers
@@ -27,5 +36,15 @@ router.use("/pagos", pagosRouter);
 router.use("/comments", comentariosRouter);
 router.use("/password", forgotPasswordRouter);
 router.use("/resetPassword", resetPasswordRouter);
+router.use("/pago", pagoRouter)
+router.use("/whatsapp", wapRouter)
+router.use("/newsletter", newsletterRouter);
 
+router.use("/chatconversation", conversationRouter);
+router.use("/chatmessage", messageRouter);
+router.use("/favs", favsRouter);
+router.use("/admin", adminRouter)
+
+
+router.use("/loginGoogle" , googleRouter)
 module.exports = router;

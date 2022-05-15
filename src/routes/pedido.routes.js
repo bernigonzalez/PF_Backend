@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const { getAllPedidos, getPedidosByUsuario, createPedido, updateStatusPedido, deletePedido, getPedidosById } = require('../controllers/controllerPedido');
-const { Usuario } = require('../db');
+const { Usuario ,Pedido} = require('../db');
 const pedidoRouter = Router();
 const { check, validationResult } = require('express-validator');
 
 // Requerimos los middlewares de autenticación
 const { authentication, adminAuthentication } = require("../middlewares");
-const { PENDIENTE, COMPLETADO } = require('../data/constantes');
+const {PENDIENTE , ENPROCESO ,ENVIADO, ENTREGADO , RECHAZADO} = require("../data/constantes");
 
 
 // @route GET pedidos/
@@ -28,14 +28,15 @@ pedidoRouter.get('/',
 // @route GET pedidos/user/:userId
 // @desc Obtener todos los pedidos que ha realizado un usuario
 // @access Private
-pedidoRouter.get('/user/:userId',
+pedidoRouter.get('/user/:userId', authentication,
    
    async (req, res, next) => {
       const { userId } = req.params;
 
       // Traigo el usuario que me proporcionó el token
       let user = await Usuario.findByPk(req.usuario.id);
-      user = user.toJSON();
+     /*  user = user.toJSON(); */
+     user && (user = user.toJSON());
 
       // Le permito el acceso si el usuario es el propietario del token o es admin
       if (req.usuario.id === parseInt(userId) || user.rol == "2") {
@@ -68,7 +69,7 @@ pedidoRouter.get('/:pedidoId',
 // @route POST pedidos/
 // @desc Realizar un pedido
 // @access Private
-pedidoRouter.post('/', [
+pedidoRouter.post('/',  authentication, [
    check('pedidos', 'El campo "pedidos" es requerido y debe ser un array con la forma [{productoId: 1, cantidad: 2}]').isArray({ min: 1 }).custom(pedidos => {
       let res;
       res = pedidos.filter(e => {
@@ -107,8 +108,8 @@ pedidoRouter.post('/', [
 // @desc Actualizar el estado de un pedido
 // @access Private Admin
 pedidoRouter.put('/:pedidoId', [
-   check('status', `El campo "status" es requerido y debe ser igual a ${PENDIENTE} o ${COMPLETADO}`).isString().trim().custom(status =>
-      [PENDIENTE, COMPLETADO].includes(status)
+   check('status', `El campo "status" es requerido y debe ser igual a ${PENDIENTE} o ${ENVIADO} o ${ENPROCESO} o ${ENTREGADO} o ${RECHAZADO}`).isString().trim().custom(status =>
+      [PENDIENTE, ENVIADO ,ENPROCESO, ENTREGADO , RECHAZADO].includes(status)
    ),
 ],
    
@@ -131,6 +132,24 @@ pedidoRouter.put('/:pedidoId', [
       return res.json(get);
    }
 );
+ pedidoRouter.post('/update' , async (req ,res) => {
+   const {idPedido , status} = req.body
+   console.log(idPedido , status)
+   try {
+    const statusUpdate =  await Pedido.update({
+         pagado: status
+      }, {
+         where: {
+            id: idPedido
+         }
+      });
+
+     res.status(200).json(statusUpdate)
+   } catch (error) {
+      console.log(error);
+     res.status(404).send('pedido no encontrado')
+   }
+})
 
 
 

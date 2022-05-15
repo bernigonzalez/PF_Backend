@@ -12,7 +12,7 @@ module.exports = [
       nombre: "Iluminacion"
    },
    {
-      nombre: "Accesorios"
+      nombre: "Exterior"
    },
    
 ]

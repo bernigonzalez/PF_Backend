@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
 
    try {
       const decoded = jwt.verify(token, JWT_SECRET);
-
+       console.log(decoded.usuario)
       // Compruebo que efectivamente el usuario exista en la DDBB
       const user = await Usuario.findByPk(decoded.usuario.id);
       !user && next({ status: 400, message: "Invalid user" });

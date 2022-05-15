@@ -68,7 +68,11 @@ const {
   Carrito,
   CarritoDetalle,
   Ofertas,
-  OfertaProducto
+  OfertaProducto,
+  Newsletter,
+  ChatConversation,
+  ChatMessage,
+  Favoritos
 } = sequelize.models;
 
 module.exports = {
@@ -83,5 +87,9 @@ module.exports = {
   Ofertas,
   OfertaProducto,
   Comentario,
+  Newsletter,
+  ChatConversation,
+  ChatMessage,
+  Favoritos,
   conn: sequelize, // para importar la conexión { conn } = require('./db.js');
 };

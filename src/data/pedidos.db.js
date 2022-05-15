@@ -30,5 +30,14 @@ module.exports = [
          { "productoId": 6, "cantidad": 2 },
          { "productoId": 26, "cantidad": 1 },
       ]
-   }
+   },
+   {
+      "usuarioId": 3,
+      "pedidos": [
+         { "productoId": 20, "cantidad": 1 },
+         { "productoId": 21, "cantidad": 1 },
+         { "productoId": 31, "cantidad": 1 },
+         { "productoId": 32, "cantidad": 1 }
+      ]
+   },
 ];
