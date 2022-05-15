@@ -116,6 +116,7 @@ userRouter.post("/register", [
 userRouter.post("/login", [
   check('email', 'Incluya un email válido').isEmail().exists(),
   check('contrasena', 'Incluya una contraseña válida').isString().exists()
+  
 ], async (req, res, next) => {
   // Validaciones de express-validator
   const errors = validationResult(req);
@@ -177,6 +178,7 @@ userRouter.post("/login", [
 // @desc Información del usuario
 // @access Private
 userRouter.get("/", authentication, async (req, res, next) => {
+
   try {
     let user = await Usuario.findByPk(req.usuario.id);
 
