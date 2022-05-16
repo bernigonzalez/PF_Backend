@@ -22,6 +22,7 @@ const messageRouter = require("./message.routes")
 const googleRouter = require("./loginGoogle.routes")
 const favsRouter = require("./favoritos.routes")
 const adminRouter = require("./admin.routes")
+const notifRouter = require("./notifications.routes")
 const router = Router();
 
 // Configuramos los routers
@@ -44,6 +45,7 @@ router.use("/chatconversation", conversationRouter);
 router.use("/chatmessage", messageRouter);
 router.use("/favs", favsRouter);
 router.use("/admin", adminRouter)
+router.use("/notifications", notifRouter)
 
 
 router.use("/loginGoogle" , googleRouter)
