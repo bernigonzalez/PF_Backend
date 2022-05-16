@@ -566,4 +566,103 @@ module.exports = [
    "cantidad": 30,
 },
 
+{
+   "id": 52,
+   "title": "Maceta Javascript",
+   "price": 75,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/maceta-premium-n-27-blanco1-0fcba42b1e1a3c470616445200435617-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/maceta-premium-n-27-gris1-e2e9871341d3ad9f9216445201596183-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/maceta-premium-n-27-beige1-e236395170e5a8096d16445202482195-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/maceta-premium-n-27-negro1-a49b4bb54daff406b616445199044082-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/maceta-premium-n-27-blanco-11-56fb666fe8af23fa8316445200437849-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/maceta-premium-n-27-gris-31-e21c34a1345d87f13816445201597642-640-0.png"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 53,
+   "title": "Maceta React",
+   "price": 55,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/rosa-221-b8805328b0f55adb4616322702490053-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/amarillo-221-0620c3ba7f6d21204116322702564200-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/violeta-221-e03b11bca13c3676c916322702451561-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/verde-221-abd1b2a33c9bd7e68116322702531056-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/negro-221-b6b6a4602f1e16ed4216322702278444-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gris-221-1a72bdc29e130a7b5e16322702317507-640-0.jpg"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 54,
+   "title": "Maceta Redux",
+   "price": 35,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gris-181-466471569c0b3d5af016322699592876-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/beige-182-3113eb01f1d7fd16ca16322699861321-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/blanco-181-8679d60e3954f779f916322699842301-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/negro-182-ac525c5ac7278d81aa16322699429667-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/amarilla-182-d63f7d0ddc2ee1d47716322699010682-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/violeta-181-a5afdc4a68439a716916322697939965-640-0.jpg"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 55,
+   "title": "Maceta Node.Js",
+   "price": 35,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gota-70-blanco1-7afac04c5528fa8acf16322566606819-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gota-70-beige1-ccf913110784c96c2916322566564477-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gota-70-gris1-4e7d7ac3d0857b4ae816322566490103-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gota_escena_d_70-gris1-61ed1ecb4bd1a615ce16318880371461-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gota_escena_a_70-beige-b1-f777b901229226827616318880728597-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gota_escena_c_70b-blanca1-0d5e11218c92dc490716318880814797-640-0.jpg"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 56,
+   "title": "Maceta Express",
+   "price": 35,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/800x800-beige51-e061819ee99e5bac2a16292896273283-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/800x800-negro191-7167b577b47b59865f16292966027193-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/800x800-blanco31-87953af5736472240716292896645896-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/800x800-gris31-023a3f7acc47f2299d16292896265210-640-0.png", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gota_escena_d_40b-beige1-fe5c6d04022ae3b35a16318883816126-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/gota_escena_a_40b1-8edbfb650b2ef6b6e616318883868433-640-0.jpg"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 56,
+   "title": "Maceta Postgres",
+   "price": 35,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/pir-70-gris1-9c741be0c3635e05fa16322613228475-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/pir-70-blanco1-5955721cf1a433e9b416322613342928-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/pir-70-beige1-1202b4a3555a124a5916322613280492-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/pir-70-negro1-47b5f22123f883d88616322613167134-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/piramidal_69_grisb1-1d0b89fa8e33c0ed9516322283598524-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/piramidal_69_blanco1-6067c06557f2d0419c16322283967719-640-0.jpg"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 57,
+   "title": "Maceta Socket",
+   "price": 35,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/jardinera-60-blanco1-588a27928218ce023216322583657336-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/jardinera-60-negro1-93728bccbc9e7874c616322583566047-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/jardinera-60-gris1-5067204f6483a3a57f16322583353465-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/jardinera-60-beige1-008bb3294655fedece16322583461987-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/jardinera_c_60_beige-b1-b09f7c4c3b97778cac16322292195013-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/jardinera_c_60_beige1-49ea051d21d682a16b16322292198757-640-0.jpg"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 58,
+   "title": "Maceta Bootstrap",
+   "price": 35,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/cubo-40-blanco1-02a8249c77d5da889516322553702097-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/cubo-40-negro1-556ae634bd831a492516322553547239-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/cubo-40-gris1-58c04ca50030d67fc916322553651358-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/cubo-40-beige1-686c2244d8b06a2f8416322553601975-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/cuadrada_40_blanca_b1-0e126b5d9e312df4f916293066584963-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/cuadrada_40_negra_a1-87365f75e7bec60e5516293066237300-640-0.jpg"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
+{
+   "id": 59,
+   "title": "Maceta Auth.js",
+   "price": 35,
+   "description": "Increbile maceta, de diseño fino y elegante. Infaltable para resaltar tus plantas y darle un toque natural pero elegante al ambiente",
+   "images": ["https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/copa-70-negro1-33e429458fa535cafc16322412480255-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/copa-70-beige1-104c3989929e2b544916322412409788-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/copa-70-gris1-79f6b7dd550ea80beb16322412366471-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/copa-70-blanco1-a357ad72f609dfd22c16322412305394-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/jarron_69_blanco1-b2423ba0269d20082b16318929690200-640-0.jpg", "https://d3ugyf2ht6aenh.cloudfront.net/stores/979/572/products/jarron_69_beige1-d43189a27385f1083516318933682722-640-0.jpg"],
+   "category": "Macetas",
+   "size": "41.3 h x 15 w x 18.1 d (23x38x46cm)",
+   "cantidad": 30,
+},
+
 ]
