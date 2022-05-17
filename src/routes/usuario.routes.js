@@ -213,7 +213,7 @@ userRouter.get("/all",  async (req, res, next) => {
 // @route PUT user/update/
 // @desc Actualizar los datos de un usuario
 // @access Private
-userRouter.put("/update", [
+userRouter.put("/update", /*[
   check('id', 'Incluya un "id" valido').isInt({ min: 1 }),
   check('nombre', 'Incluya un "nombre" valido').isString().trim().not().isEmpty(),
   check('usuario', 'Incluya un "usuario" valido').isString().trim().not().isEmpty(),
@@ -223,18 +223,19 @@ userRouter.put("/update", [
   check('provincia', 'Incluya una provincia válida').isString().trim().not().isEmpty(),
   check('direccion', 'Incluya una direccion válida').isString().trim().not().isEmpty(),
   check('telefono', 'Incluya un telefono válido').isString().isLength({ min: 8 }),
-], authentication, async (req, res, next) => {
+], authentication,*/ async (req, res, next) => {
   // Validaciones de express-validator
-  const errors = validationResult(req);
+  /*const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return next({ status: 400, errors });
-  }
+  }*/
 
   // Si no hay errores, continúo
   const {
     id,
     nombre,
+    avatar,
     usuario,
     contrasena,
     email,
@@ -246,19 +247,19 @@ userRouter.put("/update", [
   } = req.body;
 
   if (!id) return next({ status: 400, message: "El id es Requerido" });
-  let avata = gravatar.url(email, {
+  /*let avata = gravatar.url(email, {
     s: "200", //size
     r: "pg", //rate
     d: "mm",
-  });
+  });*/
   try {
-    let password = await bcrypt.hash(contrasena, 10);
+    /*let password = await bcrypt.hash(contrasena, 10);*/
     const UserUpdate = await Usuario.update(
       {
         nombre,
-        avatar: avata,
+        avatar,
         usuario,
-        contrasena: password,
+        contrasena,
         email,
         ciudad,
         pais,
