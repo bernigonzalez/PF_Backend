@@ -134,7 +134,7 @@ module.exports = {
                include: {
                   model: Usuario,
                   // No me interesa toda la info del usuario, solo la de contacto y direccion
-                  attributes: ["id", "nombre", "email", "telefono", "pais", "direccion", "provincia"]
+                  attributes: ["id", "nombre", "email", "telefono", "pais", "direccion", "provincia","usuario"]
                }
             });
          } else {
@@ -147,7 +147,7 @@ module.exports = {
                include: {
                   model: Usuario,
                   // No me interesa toda la info del usuario, solo la de contacto y direccion
-                  attributes: ["id", "nombre", "email", "telefono", "pais", "direccion", "provincia"]
+                  attributes: ["id", "nombre", "email", "telefono", "pais", "direccion", "provincia","usuario"]
                }, where: {
                   // Agrego las restricciones de filtrado por fecha
                   fechaCreacion: {
@@ -191,17 +191,57 @@ module.exports = {
          let pedidos = await Pedido.findAll({
             where: {
                usuarioId: userId,
+            },include: {
+               model: Usuario,
+               // No me interesa toda la info del usuario, solo la de contacto y direccion
+               attributes: ["id", "nombre", "email", "telefono", "pais", "direccion", "provincia","usuario"]
             }
          });
 
-         if (!pedidos.length) {
-            return { status: 404, message: "No tiene pedidos registrados" };
-         } else {
-            return await Promise.all(pedidos.map(pedido => mapPedido(pedido)));
-         }
+         
+            pedidos = await Promise.all(pedidos.map(pedido => mapPedido(pedido)));
+            pedidos = pedidos.map(pedido => {
+               pedido.usuario = pedido.Usuario;
+               // Le quito campos que está repetidos
+               delete pedido.usuarioId;
+               delete pedido.Usuario;
+
+               return pedido;
+            });
+
+            return pedidos;
+         
       } catch (error) {
          console.log(error);
          return { error: {} }
+      }
+   },
+
+   getPedidosByStatus: async (value) => {
+      try {
+         const pedido = await Pedido.findAll(
+            {where:{status:value},
+             include: {
+               model: Usuario,
+               // No me interesa toda la info del usuario, solo la de contacto y direccion
+               attributes: ["id", "nombre", "email", "telefono", "pais", "direccion", "provincia","usuario"]
+            }})
+    
+            let pedidos = await Promise.all(pedido.map(pedido => mapPedido(pedido)));
+                pedidos = pedidos.map(pedido => {
+                   pedido.usuario = pedido.Usuario;
+                   // Le quito campos que está repetidos
+                   delete pedido.usuarioId;
+                   delete pedido.Usuario;
+    
+                   return pedido;
+                });
+    
+               //console.log(pedidos) 
+             
+         return pedidos
+      } catch (error) {
+         console.log(error)
       }
    },
 
@@ -215,6 +255,41 @@ module.exports = {
       } catch (error) {
          console.log(error);
          return { error: {} }
+      }
+   },
+
+   getPedidoByNum: async (pedidoId) => {
+      try {
+        
+         const pedido = await Pedido.findByPk(pedidoId,
+            {include: {
+               model: Usuario,
+               // No me interesa toda la info del usuario, solo la de contacto y direccion
+               attributes: ["id", "nombre", "email", "telefono", "pais", "direccion", "provincia","usuario"]
+            }})
+
+            
+   
+            // let pedidos = await Promise.all(pedido.map(pedido => mapPedido(pedido)));
+            //        pedidos = pedidos.map(pedido => {
+            //           pedido.usuario = pedido.Usuario;
+            //           // Le quito campos que está repetidos
+            //           delete pedido.usuarioId;
+            //           delete pedido.Usuario;
+       
+            //           return pedido;
+            //        });
+       
+                  //console.log(pedidos)
+                  pedido.dataValues.usuario=pedido.dataValues.Usuario
+                  pedido.dataValues.totalPedido=pedido.dataValues.total 
+                  pedido.dataValues.pedidoId=pedido.dataValues.id 
+                //let pedidos= pedido.dataValues.usuario
+                //console.log(pedido)
+      
+         return pedido
+      } catch (error) {
+         console.log(error)
       }
    },
 
