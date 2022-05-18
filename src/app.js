@@ -13,7 +13,8 @@ require('./db.js');
  
 const app = express();
 const http = require("http")
-const {Server} = require("socket.io")
+const {Server} = require("socket.io");
+const { postChatNotif, postNotif, findAdminId } = require('./controllers/controllerNotif.js');
 
 const server = http.createServer(app) //creamos un http server con express
 
@@ -98,25 +99,66 @@ io.on("connection", async (socket) => {
 
     
 
-    socket.on("notif_newMessage", (data) => {
+    socket.on("notif_newMessage", async (data) => {
+        let notif = await postChatNotif(data)
         io.emit("notif_newMessage", data)
     })
 
-    socket.on("notif_newReview", (data) => {
-        io.emit("notif_newReview", data)
+    socket.on("notif_newReview", async (data) => {
+        let obj = {
+          userId : data.admin.id,
+          type: 2,
+          status: "pendiente",
+          sender: data.user.id,
+          senderName: data.user.nombre,
+          text: data.producto
+        }
+        let notif = await postNotif(obj)
+        io.emit("notif_newReview", obj)
     })
     
-    socket.on("notif_newOrder", (data) => {
-        io.emit("notif_newOrder", data)
+    socket.on("notif_newOrder", async(data) => {
+        let admin = await findAdminId()
+        let obj = {
+          userId : admin.id,
+          type: 3,
+          status: "pendiente",
+          sender: data.usuarioId,
+          senderName: "",
+          text: data.totalPedido,
+        }
+        let notif = await postNotif(obj)
+        io.emit("notif_newOrder", obj)
     })
 
-    socket.on("notif_newRegister", (data) => {
-        io.emit("notif_newRegister", data)
+    socket.on("notif_newRegister", async (data) => {
+      let admin = await findAdminId()
+      
+      let obj = {
+        userId : admin.id,
+        type: 4,
+        status: "pendiente",
+        // sender: data.usuarioId,
+        senderName: data.nombre,
+        text: "",
+      }
+        let notif = await postNotif(obj)
+        io.emit("notif_newRegister", obj)
     })
 
-    socket.on("notif_newOrderStatus", (data) => {
-      console.log("llego evento notif_newOrderStatus")
-        io.emit("notif_newOrderStatus", data)
+    socket.on("notif_newOrderStatus", async (data) => {
+      let admin = await findAdminId()
+      
+      let obj = {
+        userId : data.usuarioId,
+        type: 5,
+        status: data.status,
+        sender: admin.id,
+        senderName: admin.nombre,
+        text: data.pedidoId,
+      }
+        let notif = await postNotif(obj)
+        io.emit("notif_newOrderStatus", obj)
     })
 
 

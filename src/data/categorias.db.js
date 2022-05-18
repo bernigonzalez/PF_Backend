@@ -14,5 +14,8 @@ module.exports = [
    {
       nombre: "Exterior"
    },
+   {
+      nombre: "Macetas"
+   },
    
 ]
