@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getAllPedidos, getPedidosByUsuario, createPedido, updateStatusPedido, deletePedido, getPedidosById } = require('../controllers/controllerPedido');
+const { getAllPedidos, getPedidosByUsuario, createPedido, updateStatusPedido, deletePedido, getPedidosById, getPedidosByStatus, getPedidoByNum } = require('../controllers/controllerPedido');
 const { Usuario ,Pedido} = require('../db');
 const pedidoRouter = Router();
 const { check, validationResult } = require('express-validator');
@@ -165,5 +165,22 @@ pedidoRouter.delete('/:pedidoId', async (req, res, next) => {
 
    res.status(204).end();
 })
+ pedidoRouter.post('/pedidoById',async (req,res,next)=>{
+    const {numPedido} = req.body;
+   
+    const order = await getPedidoByNum(numPedido)
+    res.send(order)
+    
+ })
+
+
+ pedidoRouter.post('/status',async (req,res,next)=>{
+   const {value} = req.body;
+   //console.log(value)
+   const order =await getPedidosByStatus(value)
+  //console.log(order)
+   res.send(order)
+})
+
 
 module.exports = pedidoRouter;
