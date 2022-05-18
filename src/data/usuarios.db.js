@@ -57,5 +57,17 @@ module.exports = [
       "direccion": "Av. Occidental",
       "telefono": "0919823198",
       "rol": "1",
+   },
+   {
+      "nombre": "Bernardo",
+      "usuario": "berna123",
+      "contrasena": "bernardo",
+      "email": "bjcgonzalez@hotmail.com.ar",
+      "pais": "Argentina",
+      "provincia": "Misiones",
+      "ciudad": "Posadas",
+      "direccion": "Av. San Martin",
+      "telefono": "1127536488",
+      "rol": "1",
    }
 ]
