@@ -126,7 +126,7 @@ const postProducto = async (title, price, description, size, categoriaId, images
   }
 }
 
-const putProducto = async (title, price, description, category, image, cantidad, id) => {
+const putProducto = async (title, price, description, category, images, cantidad, id) => {
   try {
     console.log("category es:", category)
     let update = await Producto.update(
@@ -136,7 +136,7 @@ const putProducto = async (title, price, description, category, image, cantidad,
         price: price,
         description: description,
         categoriaId: category, //categoryId almacena el id de la categoría a la que pertenece
-        image: image,
+        images: images,
         cantidad: cantidad
       },
       { where: { id } })

@@ -102,10 +102,10 @@ productRouter.put('/:id', [
     }
 
     // Si no hay errores, continúo
-    const { title, price, description, category, image, cantidad } = req.body;
+    const { title, price, description, category, images, cantidad } = req.body;
     const { id } = req.params;
 
-    let put = await putProducto(title, price, description, category, image, cantidad, id);
+    let put = await putProducto(title, price, description, category, images, cantidad, id);
     if (put.error) return next(put.error);
 
     res.json(put);
